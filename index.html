@@ -6,342 +6,68 @@
   <title>カーコング | 賢い消費者 お金を損しない車選び</title>
   <style>
     :root {
-      --bg: #061a12;
-      --bg-soft: #0f2b20;
-      --card: #103427;
-      --accent: #f2d84b;
-      --accent-soft: #d5f59b;
-      --text: #f5ffe9;
-      --muted: #b5d7c5;
-      --ok: #67f27e;
+      --bg:#0c0804;
+      --bg-soft:#19110a;
+      --gold:#e8b96b;
+      --gold-soft:#f4d6a0;
+      --text:#f9f1e4;
+      --muted:#c5b39a;
+      --line:rgba(232,185,107,.3);
     }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      background: radial-gradient(circle at 18% 8%, #1f5e43 0, var(--bg) 45%, #03110c 100%);
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    .wrap { width: min(1120px, 92%); margin: 0 auto; }
-
-    header.hero {
-      min-height: 92vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      padding: 4rem 0;
-    }
-
-    .halo {
-      position: absolute;
-      width: 1100px;
-      height: 1100px;
-      background: radial-gradient(circle, rgba(210,255,120,.22) 0%, rgba(242,216,75,.10) 38%, transparent 70%);
-      top: -420px;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      margin-bottom: .5rem;
-      line-height: 1.2;
-      text-shadow: 0 8px 30px rgba(155,255,118,.22);
-    }
-
-    .lead {
-      font-size: clamp(1rem, 2.2vw, 1.3rem);
-      color: var(--accent-soft);
-      margin-bottom: 1rem;
-    }
-
-    .hero-card {
-      background: linear-gradient(145deg, rgba(16,52,39,.92), rgba(8,31,23,.86));
-      border: 1px solid rgba(210,255,120,.40);
-      border-radius: 22px;
-      padding: 2rem;
-      box-shadow: 0 28px 80px rgba(0,0,0,.42), 0 0 0 1px rgba(103,242,126,.15) inset;
-      backdrop-filter: blur(4px);
-      max-width: 900px;
-    }
-
-    .painting {
-      margin: 1.4rem auto 0;
-      border-radius: 16px;
-      border: 1px solid rgba(212,175,55,.35);
-      background:
-        linear-gradient(160deg, rgba(25,78,58,.72), rgba(6,26,18,.96)),
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 35%),
-        radial-gradient(circle at 72% 35%, rgba(242,216,75,.30), transparent 42%);
-      padding: 1.3rem;
-      text-align: left;
-      color: #e8f7dd;
-      font-size: .95rem;
-    }
-
-    .section { padding: 4rem 0 2rem; }
-    .grid { display: grid; gap: 1.2rem; }
-
-    .shop {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid rgba(212,175,55,.28);
-      border-radius: 16px;
-      padding: 1.2rem;
-    }
-
-    h2 { font-size: clamp(1.4rem, 2.5vw, 2.2rem); margin: 0 0 1rem; }
-    h3 { margin-top: 0; color: var(--accent-soft); }
-
-    .qa-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .8rem;
-      margin-bottom: 1rem;
-      align-items: center;
-    }
-
-    input, button {
-      border-radius: 999px;
-      border: 1px solid rgba(210,255,120,.40);
-      padding: .68rem 1rem;
-      font-size: .95rem;
-      background: #0a241a;
-      color: var(--text);
-    }
-
-    button {
-      cursor: pointer;
-      background: linear-gradient(90deg, #5abf4b, #f2d84b);
-      color: #092312;
-      font-weight: 700;
-    }
-
-    .qa-item { margin-bottom: .75rem; }
-    details {
-      background: #0f2a1f;
-      border: 1px solid rgba(212,175,55,.24);
-      border-radius: 12px;
-      padding: .85rem 1rem;
-    }
-
-    summary { cursor: pointer; font-weight: 700; color: #d5f59b; }
-    .article {
-      margin-top: .8rem;
-      background: rgba(0,0,0,.2);
-      border-radius: 10px;
-      padding: .8rem;
-      color: var(--muted);
-      white-space: pre-line;
-    }
-
-    footer { padding: 2rem 0 4rem; color: #96b9a4; text-align: center; }
-    .badge { color: var(--ok); font-weight: 700; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;background:radial-gradient(circle at 50% -10%,#3a2812 0,#120d08 40%,#070503 100%);color:var(--text);line-height:1.8}
+    .wrap{width:min(1120px,92%);margin:0 auto}
+    .hero{padding:3rem 0 2rem}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1.3rem;align-items:stretch}
+    .panel{background:linear-gradient(165deg,rgba(32,22,14,.9),rgba(16,10,6,.88));border:1px solid var(--line);border-radius:20px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    h1{font-size:clamp(2rem,5vw,3.7rem);line-height:1.2;margin:.3rem 0 1rem;text-shadow:0 10px 30px rgba(0,0,0,.6)}
+    .lead{color:var(--gold-soft);font-size:clamp(1rem,2vw,1.2rem);margin:0}
+    .hero p{color:var(--muted)}
+    .image-box{overflow:hidden;padding:0;position:relative}
+    .image-box img{width:100%;height:100%;object-fit:cover;display:block;min-height:420px;filter:contrast(1.05) saturate(1.08)}
+    .image-tag{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.55);border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem;font-size:.82rem;color:var(--gold-soft)}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
+    .kpi div{border:1px solid var(--line);border-radius:14px;padding:.8rem;background:rgba(255,255,255,.02)}
+    .kpi strong{display:block;color:var(--gold)}
+    .section{padding:2rem 0}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .card{background:var(--bg-soft);border:1px solid var(--line);border-radius:14px;padding:1rem}
+    h2{font-size:clamp(1.4rem,3vw,2rem)}
+    footer{padding:2rem 0 3rem;text-align:center;color:#9d8a73}
+    @media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="halo"></div>
-    <div class="hero-card wrap">
-      <p class="lead">中古車選びの“悟り”を、あなたへ。</p>
-      <h1>カーコング<br>賢い消費者 お金を損しない車選び</h1>
-      <p>先進的で信頼感のある世界観で、ゴリラ賢者がサラリーマンへ「失敗しない中古車選び」の知恵を授けるLPです。</p>
-      <div class="painting">
-        <strong>ビジュアルコンセプト（実装イメージ）</strong><br>
-        グリーンのグラデーション・イエローのハイライト・知性あるゴリラ像・データを読むビジネスパーソン。<br>
-        「価格だけで決めない」「総額・保証・整備履歴で判断する」という教えを、物語として届けます。
-      </div>
+  <header class="hero wrap">
+    <div class="hero-grid">
+      <article class="panel">
+        <p class="lead">あなたは、もう“安さだけ”で選ばない。</p>
+        <h1>カーコング<br>賢い消費者<br>お金を損しない車選び</h1>
+        <p>「あなたはデザイナーです」という気持ちで、世界観を一新しました。重厚な神殿、賢者ゴリラ、そして“選択の美学”。この1枚から、車選びの基準を変えるLPです。</p>
+        <div class="kpi">
+          <div><strong>01 相場を知る</strong><span>価格だけでなく総額で見る</span></div>
+          <div><strong>02 履歴を知る</strong><span>整備記録・修復歴を確認</span></div>
+          <div><strong>03 未来を知る</strong><span>3年後の維持費まで試算</span></div>
+        </div>
+      </article>
+      <figure class="panel image-box">
+        <img src="./gorilla-temple-car.png" alt="神殿で車を前に教えを授けるゴリラ賢者" />
+        <figcaption class="image-tag">メインビジュアル</figcaption>
+      </figure>
     </div>
   </header>
 
   <section class="section wrap">
-    <h2>店舗情報（URL掲載情報をベースにした枠）</h2>
-    <div class="grid shop">
-      <article class="card"><h3>店舗名</h3><p>カーコング（掲載ページ準拠）</p></article>
-      <article class="card"><h3>取扱い</h3><p>中古車販売・相談・購入サポート</p></article>
-      <article class="card"><h3>こんな方へ</h3><p>初めての中古車購入で損したくない方／見積り比較が苦手な方</p></article>
-      <article class="card"><h3>訴求ポイント</h3><p>総額重視・維持費まで含めた提案・納得して買える説明力</p></article>
+    <h2>カーコングの提案</h2>
+    <div class="cards">
+      <article class="card"><h3>比較設計</h3><p>見積りは2〜3社を横並び。諸費用と保証を同じ条件で比較します。</p></article>
+      <article class="card"><h3>リスク管理</h3><p>購入前に故障リスクと消耗品コストを把握。納車後の後悔を減らします。</p></article>
+      <article class="card"><h3>納得購入</h3><p>“今安い”より“あとで損しない”を優先し、長期で得する選択へ導きます。</p></article>
     </div>
-  </section>
-
-  <section class="section wrap">
-    <h2>Q&amp;A記事セクション（50件・仮）</h2>
-    <p>質問を開くと、<span class="badge">から記事自動生成</span>ボタンで本文ひな形を作成できます。運用時はこのひな形を編集して本記事化してください。</p>
-    <div class="qa-controls">
-      <input id="keyword" type="text" placeholder="例）保証 / ローン / 軽自動車" />
-      <button id="filterBtn">Q&amp;Aを絞り込み</button>
-      <button id="resetBtn">リセット</button>
-    </div>
-    <div id="qaList"></div>
-    <article class="card" style="margin-top:1rem">
-      <h3>記事追記エリア（手動入力）</h3>
-      <p>Q&Aとは別に、自由な記事を追記できます。保存すると下に蓄積されます（ブラウザ保存）。</p>
-      <input id="manualTitle" type="text" placeholder="記事タイトル" style="width:100%; margin-bottom:.6rem; border-radius:12px" />
-      <textarea id="manualBody" placeholder="記事本文" style="width:100%; min-height:140px; background:#0a241a; color:#f5ffe9; border:1px solid rgba(210,255,120,.40); border-radius:12px; padding:.8rem"></textarea>
-      <p style="margin:.8rem 0 0; display:flex; gap:.6rem; flex-wrap:wrap">
-        <button id="saveManual">記事を保存</button>
-        <button id="clearManual">入力クリア</button>
-      </p>
-      <div id="manualList" style="margin-top:1rem"></div>
-    </article>
   </section>
 
   <footer>
-    <small>© CarKong LP Prototype | テーマ：賢い消費者 お金を損しない車選び</small>
+    <small>© CarKong Design Refresh | テーマ：賢い消費者 お金を損しない車選び</small>
   </footer>
-
-  <script>
-    const qaSeed = [
-      "中古車の『支払総額』は何を含み、どこを確認すべき？",
-      "安い車ほど得とは限らないのはなぜ？",
-      "年式・走行距離・修復歴の優先順位は？",
-      "見積り比較で最初に見るべき3項目は？",
-      "諸費用が高い店舗を見分ける方法は？",
-      "保証付き中古車を選ぶメリットは？",
-      "保証範囲で特に確認すべき部位は？",
-      "納車前整備はどこまで求めていい？",
-      "車検残ありの車は本当にお得？",
-      "点検記録簿の読み方を知りたい",
-      "事故歴と修復歴はどう違う？",
-      "ワンオーナー車は必ず安心？",
-      "購入後に想定外の出費が出るポイントは？",
-      "タイヤ交換時期の見抜き方は？",
-      "バッテリー劣化を現地で判断するには？",
-      "試乗時に必ず確認する項目は？",
-      "異音があったらどこまで交渉すべき？",
-      "雨の日に確認すべき車両ポイントは？",
-      "中古ハイブリッド車で注意する点は？",
-      "軽自動車と普通車、維持費差はどれくらい？",
-      "燃費表示を鵜呑みにしないコツは？",
-      "自動車税・重量税・保険料の基本を知りたい",
-      "任意保険の等級が購入判断に与える影響は？",
-      "ローン金利は何%差で損得が変わる？",
-      "残価設定ローンの注意点は？",
-      "現金一括とローン、どちらが得？",
-      "下取り価格を上げる準備は何をすべき？",
-      "買取査定と下取りの同時進行は必要？",
-      "相見積りは何社くらい取るべき？",
-      "オンライン商談で失敗しない方法は？",
-      "写真だけで判断してはいけない理由は？",
-      "遠方購入のリスク管理はどうする？",
-      "納車までのスケジュール管理術は？",
-      "契約前にキャンセル規定を確認すべき理由は？",
-      "クーリングオフは中古車購入で使える？",
-      "契約書の『特約』で見落としがちな箇所は？",
-      "名義変更トラブルを避けるには？",
-      "ETC・ドラレコ・ナビの付属確認ポイントは？",
-      "保証継承できるディーラー系中古車の利点は？",
-      "認定中古車と一般中古車の違いは？",
-      "ファミリー向け車選びで失敗しない条件は？",
-      "通勤用の最適車種を選ぶ考え方は？",
-      "雪国で使う中古車のチェック項目は？",
-      "海沿い地域の塩害リスクを見抜く方法は？",
-      "災害時に役立つ車選びの観点は？",
-      "リセールバリューを意識した買い方は？",
-      "売却時に損しないメンテ履歴管理とは？",
-      "購入初年度にやるべき予防整備は？",
-      "『今買うべきか待つべきか』の判断基準は？",
-      "信頼できる販売店を見抜く5つの質問とは？"
-    ];
-
-    const list = document.getElementById('qaList');
-
-    function buildArticle(question) {
-      const k = document.getElementById('keyword').value.trim() || '中古車選び';
-      return `【要点】\n${question}に対しては、価格の安さだけでなく総額・保証・整備履歴を同時に比較するのが基本です。\n\n【実践ステップ】\n1. 相見積りを2〜3件取得し、諸費用内訳を横並び比較する\n2. 契約前に保証対象と期間、除外条件を文書で確認する\n3. 納車後1年の維持費（税金・保険・消耗品）を試算する\n\n【カーコング視点】\nキーワード「${k}」に関連する相談では、“今安い”より“あとで損しない”を優先します。\n\n【まとめ】\n迷ったら「この1台を3年使った総コスト」で判断すると、失敗率を下げられます。`;
-    }
-
-    function render(items) {
-      list.innerHTML = '';
-      items.forEach((q, i) => {
-        const wrap = document.createElement('div');
-        wrap.className = 'qa-item';
-        wrap.innerHTML = `
-          <details>
-            <summary>Q${i + 1}. ${q}</summary>
-            <div class="article" id="article-${i}">（まだ記事はありません）</div>
-            <p style="margin:.8rem 0 0">
-              <button data-id="${i}" class="genBtn">から記事を生成</button>
-            </p>
-          </details>
-        `;
-        list.appendChild(wrap);
-      });
-
-      document.querySelectorAll('.genBtn').forEach(btn => {
-        btn.addEventListener('click', e => {
-          const id = Number(e.target.dataset.id);
-          const text = buildArticle(items[id]);
-          e.target.closest('details').querySelector('.article').textContent = text;
-        });
-      });
-    }
-
-    document.getElementById('filterBtn').addEventListener('click', () => {
-      const k = document.getElementById('keyword').value.trim();
-      if (!k) return render(qaSeed);
-      render(qaSeed.filter(q => q.includes(k)));
-    });
-
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      document.getElementById('keyword').value = '';
-      render(qaSeed);
-    });
-
-    const manualKey = 'carkong_manual_articles';
-
-    function loadManualArticles() {
-      try { return JSON.parse(localStorage.getItem(manualKey) || '[]'); }
-      catch { return []; }
-    }
-
-    function saveManualArticles(items) {
-      localStorage.setItem(manualKey, JSON.stringify(items));
-    }
-
-    function renderManualArticles() {
-      const area = document.getElementById('manualList');
-      const items = loadManualArticles();
-      if (!items.length) {
-        area.innerHTML = '<p style="color:#c9bddf">（まだ手動記事はありません）</p>';
-        return;
-      }
-      area.innerHTML = items.map((it, idx) => `
-        <details style="margin-bottom:.6rem">
-          <summary>記事${idx + 1}: ${it.title}</summary>
-          <div class="article">${it.body}</div>
-        </details>
-      `).join('');
-    }
-
-    document.getElementById('saveManual').addEventListener('click', () => {
-      const title = document.getElementById('manualTitle').value.trim();
-      const body = document.getElementById('manualBody').value.trim();
-      if (!title || !body) return alert('タイトルと本文を入力してください。');
-      const items = loadManualArticles();
-      items.unshift({ title, body });
-      saveManualArticles(items);
-      renderManualArticles();
-      document.getElementById('manualTitle').value = '';
-      document.getElementById('manualBody').value = '';
-    });
-
-    document.getElementById('clearManual').addEventListener('click', () => {
-      document.getElementById('manualTitle').value = '';
-      document.getElementById('manualBody').value = '';
-    });
-
-    renderManualArticles();
-    render(qaSeed);
-  </script>
 </body>
 </html>
