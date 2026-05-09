@@ -182,6 +182,17 @@
       <button id="resetBtn">リセット</button>
     </div>
     <div id="qaList"></div>
+    <article class="card" style="margin-top:1rem">
+      <h3>記事追記エリア（手動入力）</h3>
+      <p>Q&Aとは別に、自由な記事を追記できます。保存すると下に蓄積されます（ブラウザ保存）。</p>
+      <input id="manualTitle" type="text" placeholder="記事タイトル" style="width:100%; margin-bottom:.6rem; border-radius:12px" />
+      <textarea id="manualBody" placeholder="記事本文" style="width:100%; min-height:140px; background:#130f2d; color:#f8f4e8; border:1px solid rgba(212,175,55,.45); border-radius:12px; padding:.8rem"></textarea>
+      <p style="margin:.8rem 0 0; display:flex; gap:.6rem; flex-wrap:wrap">
+        <button id="saveManual">記事を保存</button>
+        <button id="clearManual">入力クリア</button>
+      </p>
+      <div id="manualList" style="margin-top:1rem"></div>
+    </article>
   </section>
 
   <footer>
@@ -286,6 +297,50 @@
       render(qaSeed);
     });
 
+    const manualKey = 'carkong_manual_articles';
+
+    function loadManualArticles() {
+      try { return JSON.parse(localStorage.getItem(manualKey) || '[]'); }
+      catch { return []; }
+    }
+
+    function saveManualArticles(items) {
+      localStorage.setItem(manualKey, JSON.stringify(items));
+    }
+
+    function renderManualArticles() {
+      const area = document.getElementById('manualList');
+      const items = loadManualArticles();
+      if (!items.length) {
+        area.innerHTML = '<p style="color:#c9bddf">（まだ手動記事はありません）</p>';
+        return;
+      }
+      area.innerHTML = items.map((it, idx) => `
+        <details style="margin-bottom:.6rem">
+          <summary>記事${idx + 1}: ${it.title}</summary>
+          <div class="article">${it.body}</div>
+        </details>
+      `).join('');
+    }
+
+    document.getElementById('saveManual').addEventListener('click', () => {
+      const title = document.getElementById('manualTitle').value.trim();
+      const body = document.getElementById('manualBody').value.trim();
+      if (!title || !body) return alert('タイトルと本文を入力してください。');
+      const items = loadManualArticles();
+      items.unshift({ title, body });
+      saveManualArticles(items);
+      renderManualArticles();
+      document.getElementById('manualTitle').value = '';
+      document.getElementById('manualBody').value = '';
+    });
+
+    document.getElementById('clearManual').addEventListener('click', () => {
+      document.getElementById('manualTitle').value = '';
+      document.getElementById('manualBody').value = '';
+    });
+
+    renderManualArticles();
     render(qaSeed);
   </script>
 </body>
