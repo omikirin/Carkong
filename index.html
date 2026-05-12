@@ -144,6 +144,21 @@
       white-space: pre-line;
     }
 
+    .article-image {
+      width: 100%;
+      margin-top: .8rem;
+      border-radius: 10px;
+      border: 1px solid rgba(210,255,120,.25);
+      object-fit: cover;
+      max-height: 320px;
+    }
+
+    .upload-hint {
+      margin: .6rem 0 0;
+      color: #b9d9c8;
+      font-size: .85rem;
+    }
+
     footer { padding: 2rem 0 4rem; color: #96b9a4; text-align: center; }
     .badge { color: var(--ok); font-weight: 700; }
   </style>
@@ -155,8 +170,8 @@
       <p class="lead">中古車選びの“悟り”を、あなたへ。</p>
       <h1>カーコング<br>賢い消費者 お金を損しない車選び</h1>
       <p>先進的で信頼感のある世界観で、ゴリラ賢者がサラリーマンへ「失敗しない中古車選び」の知恵を授けるLPです。</p>
-      <div class="painting">
-        <strong>ビジュアルコンセプト（実装イメージ）</strong><br>
+        <p class="upload-hint">※ ヘッダー画像は image/ フォルダの画像を基準に、アップロードで一時変更できます（ブラウザ保存）。</p>
+        <img id="heroMainImage" class="hero-main-image" alt="カーコングのメインビジュアル" src="image/hero-placeholder.svg" />
         グリーンのグラデーション・イエローのハイライト・知性あるゴリラ像・データを読むビジネスパーソン。<br>
         「価格だけで決めない」「総額・保証・整備履歴で判断する」という教えを、物語として届けます。
       </div>
@@ -187,6 +202,9 @@
       <p>Q&Aとは別に、自由な記事を追記できます。保存すると下に蓄積されます（ブラウザ保存）。</p>
       <input id="manualTitle" type="text" placeholder="記事タイトル" style="width:100%; margin-bottom:.6rem; border-radius:12px" />
       <textarea id="manualBody" placeholder="記事本文" style="width:100%; min-height:140px; background:#0a241a; color:#f5ffe9; border:1px solid rgba(210,255,120,.40); border-radius:12px; padding:.8rem"></textarea>
+      <p style="margin:.8rem 0 .4rem">記事画像（任意）</p>
+      <input id="manualImage" type="file" accept="image/*" style="width:100%; border-radius:12px" />
+      <p class="upload-hint">※ 画像はブラウザ保存されます。大きい画像は保存できない場合があります。</p>
       <p style="margin:.8rem 0 0; display:flex; gap:.6rem; flex-wrap:wrap">
         <button id="saveManual">記事を保存</button>
         <button id="clearManual">入力クリア</button>
@@ -298,6 +316,7 @@
     });
 
     const manualKey = 'carkong_manual_articles';
+    let manualImageData = '';
 
     function loadManualArticles() {
       try { return JSON.parse(localStorage.getItem(manualKey) || '[]'); }
@@ -319,25 +338,43 @@
         <details style="margin-bottom:.6rem">
           <summary>記事${idx + 1}: ${it.title}</summary>
           <div class="article">${it.body}</div>
+          ${it.image ? `<img class="article-image" src="${it.image}" alt="記事${idx + 1}の画像">` : ''}
         </details>
       `).join('');
     }
+
+    document.getElementById('manualImage').addEventListener('change', e => {
+      const file = e.target.files?.[0];
+      if (!file) {
+        manualImageData = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        manualImageData = typeof reader.result === 'string' ? reader.result : '';
+      };
+      reader.readAsDataURL(file);
+    });
 
     document.getElementById('saveManual').addEventListener('click', () => {
       const title = document.getElementById('manualTitle').value.trim();
       const body = document.getElementById('manualBody').value.trim();
       if (!title || !body) return alert('タイトルと本文を入力してください。');
       const items = loadManualArticles();
-      items.unshift({ title, body });
+      items.unshift({ title, body, image: manualImageData });
       saveManualArticles(items);
       renderManualArticles();
       document.getElementById('manualTitle').value = '';
       document.getElementById('manualBody').value = '';
+      document.getElementById('manualImage').value = '';
+      manualImageData = '';
     });
 
     document.getElementById('clearManual').addEventListener('click', () => {
       document.getElementById('manualTitle').value = '';
       document.getElementById('manualBody').value = '';
+      document.getElementById('manualImage').value = '';
+      manualImageData = '';
     });
 
     renderManualArticles();

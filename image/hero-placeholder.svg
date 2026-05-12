@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1f5e43"/>
+      <stop offset="1" stop-color="#03110c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="800" fill="url(#bg)"/>
+  <circle cx="260" cy="190" r="200" fill="#d5f59b" fill-opacity="0.15"/>
+  <circle cx="1020" cy="300" r="260" fill="#f2d84b" fill-opacity="0.1"/>
+  <text x="700" y="390" text-anchor="middle" fill="#f5ffe9" font-size="64" font-family="sans-serif">CarKong Hero Image</text>
+  <text x="700" y="450" text-anchor="middle" fill="#b5d7c5" font-size="32" font-family="sans-serif">imageフォルダ内の画像に差し替えてください</text>
+</svg>
