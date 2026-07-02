@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>荷室フィットチェッカー｜カーコング</title>
-  <meta name="description" content="ベビーカーやスーツケースの寸法を入力すると、人気ファミリーカーの荷室に積めそうか目安判定するツール。埼玉県八潮市の中古車販売店カーコング提供。" />
+  <meta name="description" content="ベビーカーやスーツケースの寸法を入力すると、軽・コンパクト・ミニバン・SUVなど国内現行車種 約50モデルの荷室に積めそうか目安判定するツール。埼玉県八潮市の中古車販売店カーコング提供。" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
   <style>
     :root {
@@ -206,7 +206,7 @@
 
   <div class="tool-head">
     <h1>🦍 荷室フィットチェッカー</h1>
-    <p>ベビーカー、積めるかな？ 荷物のサイズから積めそうな車をチェック！</p>
+    <p>ベビーカー、積めるかな？ 国内現行 約50車種から積めそうな車をチェック！</p>
   </div>
 
   <div class="wrap">
@@ -233,6 +233,9 @@
 
     <div class="panel">
       <h2>2. 判定結果 <span id="summary" style="font-size:.8rem; color:var(--muted); font-weight:700"></span></h2>
+      <div class="presets" id="carCats" style="margin-bottom:.6rem;"></div>
+      <input id="carSearch" type="search" placeholder="車名で探す（例：N-BOX／シエンタ）"
+        style="width:100%; border:2px solid var(--green); border-radius:999px; padding:.5rem 1rem; font-size:.95rem; margin-bottom:.9rem; background:#fff; color:var(--ink);" />
       <div class="car-list" id="carList"></div>
       <p class="disclaimer">※荷室寸法は代表的なグレードの参考目安値です（年式・グレード・シート位置で変わります）。「後席使用時」の荷室を基準にしています。実際の積載可否は実車でご確認ください。ご来店時の「試し積み」大歓迎です！</p>
     </div>
@@ -245,26 +248,74 @@
   </div>
 
   <script>
-    // 荷室の参考目安値（cm）: [幅, 奥行(後席使用時), 高さ]
+    // 荷室の参考目安値（cm）: [幅, 奥行(後席使用時), 高さ]  cat: 絞り込み用カテゴリ
     const cars = [
-      { name: 'ホンダ N-BOX', type: '軽スーパーハイト', dims: [110, 45, 112] },
-      { name: 'ダイハツ タント', type: '軽スーパーハイト', dims: [109, 42, 110] },
-      { name: 'スズキ スペーシア', type: '軽スーパーハイト', dims: [100, 44, 109] },
-      { name: 'スズキ ワゴンR', type: '軽ハイトワゴン', dims: [98, 40, 90] },
-      { name: 'トヨタ ルーミー', type: 'コンパクトトール', dims: [100, 52, 110] },
-      { name: 'トヨタ シエンタ', type: 'コンパクトミニバン', dims: [120, 55, 105] },
-      { name: 'ホンダ フリード', type: 'コンパクトミニバン', dims: [108, 50, 110] },
-      { name: 'トヨタ ヤリス', type: 'コンパクトカー', dims: [100, 60, 75] },
-      { name: 'ホンダ フィット', type: 'コンパクトカー', dims: [100, 65, 80] },
-      { name: 'トヨタ カローラツーリング', type: 'ステーションワゴン', dims: [105, 85, 70] },
-      { name: 'トヨタ ノア／ヴォクシー', type: 'ミドルミニバン', dims: [120, 60, 110] },
-      { name: '日産 セレナ', type: 'ミドルミニバン', dims: [120, 55, 112] },
-      { name: 'ホンダ ステップワゴン', type: 'ミドルミニバン', dims: [125, 60, 112] },
-      { name: 'トヨタ アルファード', type: 'ラージミニバン', dims: [115, 65, 105] },
-      { name: 'トヨタ ライズ', type: 'コンパクトSUV', dims: [100, 63, 78] },
-      { name: 'ホンダ ヴェゼル', type: 'コンパクトSUV', dims: [105, 70, 78] },
-      { name: 'トヨタ RAV4', type: 'ミドルSUV', dims: [110, 90, 85] },
-      { name: '日産 エクストレイル', type: 'ミドルSUV', dims: [110, 88, 82] }
+      // ---- 軽自動車 ----
+      { name: 'ホンダ N-BOX', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [110, 45, 112] },
+      { name: 'ダイハツ タント', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [109, 42, 110] },
+      { name: 'スズキ スペーシア', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [100, 44, 109] },
+      { name: '日産 ルークス', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [108, 43, 110] },
+      { name: '三菱 デリカミニ', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [108, 44, 108] },
+      { name: 'ダイハツ ムーヴキャンバス', type: '軽ハイト・スライドドア', cat: 'kei', dims: [100, 36, 98] },
+      { name: 'スズキ ワゴンRスマイル', type: '軽ハイト・スライドドア', cat: 'kei', dims: [98, 38, 97] },
+      { name: 'ホンダ N-WGN', type: '軽ハイトワゴン', cat: 'kei', dims: [102, 48, 100] },
+      { name: 'ダイハツ ムーヴ', type: '軽ハイトワゴン', cat: 'kei', dims: [100, 40, 95] },
+      { name: 'スズキ ワゴンR', type: '軽ハイトワゴン', cat: 'kei', dims: [98, 40, 90] },
+      { name: 'スズキ ハスラー', type: '軽クロスオーバー', cat: 'kei', dims: [96, 38, 88] },
+      { name: 'ダイハツ タフト', type: '軽クロスオーバー', cat: 'kei', dims: [105, 45, 80] },
+      { name: 'ホンダ N-ONE', type: '軽セミトール', cat: 'kei', dims: [96, 35, 85] },
+      { name: 'スズキ アルト', type: '軽セダン', cat: 'kei', dims: [95, 35, 85] },
+      { name: 'ダイハツ ミライース', type: '軽セダン', cat: 'kei', dims: [95, 35, 85] },
+      { name: 'スズキ ジムニー', type: '軽クロカン', cat: 'kei', dims: [97, 24, 85] },
+      { name: 'ホンダ N-VAN', type: '軽バン', cat: 'kei', dims: [120, 110, 120] },
+      { name: 'スズキ エブリイワゴン', type: '軽ワンボックス・スライドドア', cat: 'kei', dims: [120, 95, 120] },
+      // ---- コンパクトカー ----
+      { name: 'トヨタ ヤリス', type: 'コンパクトカー', cat: 'compact', dims: [100, 60, 75] },
+      { name: 'トヨタ アクア', type: 'コンパクトカー', cat: 'compact', dims: [100, 60, 72] },
+      { name: 'ホンダ フィット', type: 'コンパクトカー', cat: 'compact', dims: [100, 65, 80] },
+      { name: '日産 ノート', type: 'コンパクトカー', cat: 'compact', dims: [100, 58, 80] },
+      { name: 'スズキ スイフト', type: 'コンパクトカー', cat: 'compact', dims: [100, 55, 75] },
+      { name: 'マツダ MAZDA2', type: 'コンパクトカー', cat: 'compact', dims: [100, 52, 73] },
+      { name: 'トヨタ ルーミー', type: 'コンパクトトール・スライドドア', cat: 'compact', dims: [100, 52, 110] },
+      { name: 'スズキ ソリオ', type: 'コンパクトトール・スライドドア', cat: 'compact', dims: [100, 54, 105] },
+      // ---- ミニバン ----
+      { name: 'トヨタ シエンタ', type: 'コンパクトミニバン・スライドドア', cat: 'minivan', dims: [120, 55, 105] },
+      { name: 'ホンダ フリード', type: 'コンパクトミニバン・スライドドア', cat: 'minivan', dims: [108, 50, 110] },
+      { name: 'トヨタ ノア／ヴォクシー', type: 'ミドルミニバン・スライドドア', cat: 'minivan', dims: [120, 60, 110] },
+      { name: '日産 セレナ', type: 'ミドルミニバン・スライドドア', cat: 'minivan', dims: [120, 55, 112] },
+      { name: 'ホンダ ステップワゴン', type: 'ミドルミニバン・スライドドア', cat: 'minivan', dims: [125, 60, 112] },
+      { name: '三菱 デリカD:5', type: 'ミニバン×SUV・スライドドア', cat: 'minivan', dims: [110, 50, 105] },
+      { name: 'トヨタ アルファード／ヴェルファイア', type: 'ラージミニバン・スライドドア', cat: 'minivan', dims: [115, 65, 105] },
+      // ---- SUV ----
+      { name: 'トヨタ ライズ', type: 'コンパクトSUV', cat: 'suv', dims: [100, 63, 78] },
+      { name: 'トヨタ ヤリスクロス', type: 'コンパクトSUV', cat: 'suv', dims: [100, 65, 78] },
+      { name: 'ホンダ ヴェゼル', type: 'コンパクトSUV', cat: 'suv', dims: [105, 70, 78] },
+      { name: 'トヨタ カローラクロス', type: 'コンパクトSUV', cat: 'suv', dims: [105, 72, 80] },
+      { name: '日産 キックス', type: 'コンパクトSUV', cat: 'suv', dims: [100, 62, 78] },
+      { name: 'スバル クロストレック', type: 'コンパクトSUV', cat: 'suv', dims: [105, 70, 75] },
+      { name: 'マツダ CX-30', type: 'コンパクトSUV', cat: 'suv', dims: [100, 60, 72] },
+      { name: 'スズキ ジムニーシエラ', type: 'コンパクトクロカン', cat: 'suv', dims: [100, 30, 85] },
+      { name: 'ホンダ ZR-V', type: 'ミドルSUV', cat: 'suv', dims: [105, 75, 78] },
+      { name: 'マツダ CX-5', type: 'ミドルSUV', cat: 'suv', dims: [105, 78, 79] },
+      { name: 'トヨタ ハリアー', type: 'ミドルSUV', cat: 'suv', dims: [105, 90, 78] },
+      { name: 'トヨタ RAV4', type: 'ミドルSUV', cat: 'suv', dims: [110, 90, 85] },
+      { name: '日産 エクストレイル', type: 'ミドルSUV', cat: 'suv', dims: [110, 88, 82] },
+      { name: 'スバル フォレスター', type: 'ミドルSUV', cat: 'suv', dims: [110, 85, 85] },
+      { name: 'トヨタ ランドクルーザー250', type: 'ラージSUV', cat: 'suv', dims: [110, 95, 95] },
+      // ---- セダン・ワゴン ----
+      { name: 'トヨタ プリウス', type: 'ハッチバック', cat: 'sedan', dims: [100, 75, 70] },
+      { name: 'トヨタ カローラツーリング', type: 'ステーションワゴン', cat: 'sedan', dims: [105, 85, 70] },
+      { name: 'スバル レヴォーグ', type: 'ステーションワゴン', cat: 'sedan', dims: [108, 90, 75] },
+      { name: 'トヨタ カローラ（セダン）', type: 'セダン（トランク）', cat: 'sedan', dims: [100, 95, 50] }
+    ];
+
+    const carCats = [
+      { key: 'all', label: 'すべて' },
+      { key: 'kei', label: '軽自動車' },
+      { key: 'compact', label: 'コンパクト' },
+      { key: 'minivan', label: 'ミニバン' },
+      { key: 'suv', label: 'SUV' },
+      { key: 'sedan', label: 'セダン・ワゴン' }
     ];
 
     const presets = [
@@ -305,11 +356,35 @@
       return rots.some(([x,y,z]) => x <= W && y <= D && z <= H);
     }
 
+    let activeCat = 'all';
+    const $carCats = document.getElementById('carCats');
+    const $carSearch = document.getElementById('carSearch');
+
+    carCats.forEach(cc => {
+      const b = document.createElement('button');
+      b.className = 'preset' + (cc.key === 'all' ? ' active' : '');
+      b.textContent = cc.label;
+      b.dataset.key = cc.key;
+      b.addEventListener('click', () => {
+        activeCat = cc.key;
+        $carCats.querySelectorAll('.preset').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      });
+      $carCats.appendChild(b);
+    });
+
     function render() {
       const item = [Number($w.value)||0, Number($d.value)||0, Number($h.value)||0];
       if (item.some(v => v <= 0)) { $list.innerHTML = '<p>サイズを入力してください。</p>'; return; }
 
-      const judged = cars.map(c => {
+      const kw = $carSearch.value.trim().toLowerCase();
+      const targets = cars.filter(c =>
+        (activeCat === 'all' || c.cat === activeCat) &&
+        (!kw || (c.name + c.type).toLowerCase().includes(kw))
+      );
+
+      const judged = targets.map(c => {
         const easy = fits(item, c.dims, 5);   // 5cm以上のゆとりで入る
         const just = fits(item, c.dims, 0);   // ぴったりなら入る
         const status = easy ? 'fit' : just ? 'tight' : 'nofit';
@@ -320,7 +395,7 @@
       judged.sort((a, b) => order[a.status] - order[b.status]);
 
       const label = { fit: '✅ 積めそう', tight: '⚠️ ギリギリ', nofit: '❌ 難しそう' };
-      $list.innerHTML = judged.map(c => `
+      $list.innerHTML = judged.length ? judged.map(c => `
         <div class="car ${c.status}">
           <span class="badge">${label[c.status]}</span>
           <div>
@@ -329,17 +404,18 @@
           </div>
           <div class="dims-txt">荷室目安<br>${c.dims[0]}×${c.dims[1]}×${c.dims[2]}cm</div>
         </div>
-      `).join('');
+      `).join('') : '<p style="color:var(--muted)">該当する車種がありません。</p>';
 
       const fitCount = judged.filter(c => c.status === 'fit').length;
       const tightCount = judged.filter(c => c.status === 'tight').length;
-      $summary.textContent = `— ${cars.length}車種中 ✅${fitCount}台 ⚠️${tightCount}台`;
+      $summary.textContent = `— ${judged.length}車種中 ✅${fitCount}台 ⚠️${tightCount}台`;
     }
 
     [$w, $d, $h].forEach(el => el.addEventListener('input', () => {
-      document.querySelectorAll('.preset').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('#presets .preset').forEach(x => x.classList.remove('active'));
       render();
     }));
+    $carSearch.addEventListener('input', render);
 
     render();
   </script>
