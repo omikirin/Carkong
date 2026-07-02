@@ -3,354 +3,559 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>カーコング | 賢い消費者 お金を損しない車選び</title>
+  <title>カーコング｜埼玉県八潮市の中古車販売・買取・車検・整備</title>
+  <meta name="description" content="埼玉県八潮市の中古車販売店カーコング（有限会社ティーエヌオートクラブ）。自信を持っておすすめできる特選車のみを厳選。販売・買取・車検・修理・カスタマイズまでワンストップでお任せください。" />
   <style>
     :root {
-      --bg: #061a12;
-      --bg-soft: #0f2b20;
-      --card: #103427;
-      --accent: #f2d84b;
-      --accent-soft: #d5f59b;
-      --text: #f5ffe9;
-      --muted: #b5d7c5;
-      --ok: #67f27e;
+      --yellow: #ffd900;
+      --yellow-soft: #fff7cc;
+      --green: #1c7a3f;
+      --green-dark: #0f5229;
+      --red: #d7263d;
+      --ink: #21231f;
+      --paper: #fffdf5;
+      --muted: #5d6158;
+      --line: #e8e2c8;
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      background: radial-gradient(circle at 18% 8%, #1f5e43 0, var(--bg) 45%, #03110c 100%);
-      color: var(--text);
-      line-height: 1.7;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.8;
     }
 
-    .wrap { width: min(1120px, 92%); margin: 0 auto; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .wrap { width: min(1080px, 92%); margin: 0 auto; }
 
-    header.hero {
-      min-height: 92vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      padding: 4rem 0;
+    /* ===== header ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #fff;
+      border-bottom: 4px solid var(--yellow);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
     }
-
-    .halo {
-      position: absolute;
-      width: 1100px;
-      height: 1100px;
-      background: radial-gradient(circle, rgba(210,255,120,.22) 0%, rgba(242,216,75,.10) 38%, transparent 70%);
-      top: -420px;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .7rem 0;
     }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      margin-bottom: .5rem;
-      line-height: 1.2;
-      text-shadow: 0 8px 30px rgba(155,255,118,.22);
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--green-dark);
+      text-decoration: none;
+      letter-spacing: .04em;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
     }
-
-    .lead {
-      font-size: clamp(1rem, 2.2vw, 1.3rem);
-      color: var(--accent-soft);
-      margin-bottom: 1rem;
+    .logo .mark {
+      background: var(--yellow);
+      border-radius: 8px;
+      padding: .05rem .5rem;
+      font-size: 1.25rem;
     }
-
-    .hero-card {
-      background: linear-gradient(145deg, rgba(16,52,39,.92), rgba(8,31,23,.86));
-      border: 1px solid rgba(210,255,120,.40);
-      border-radius: 22px;
-      padding: 2rem;
-      box-shadow: 0 28px 80px rgba(0,0,0,.42), 0 0 0 1px rgba(103,242,126,.15) inset;
-      backdrop-filter: blur(4px);
-      max-width: 900px;
+    nav.global { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    nav.global a {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .92rem;
+      color: var(--ink);
     }
-
-    .hero-image {
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid rgba(212,175,55,.35);
-      margin-bottom: 1rem;
-      display: block;
+    nav.global a:hover { color: var(--green); }
+    .header-tel {
+      text-align: right;
+      line-height: 1.3;
+      white-space: nowrap;
     }
+    .header-tel a {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--red);
+      text-decoration: none;
+    }
+    .header-tel small { color: var(--muted); font-size: .72rem; }
 
-    .painting {
-      margin: 1.4rem auto 0;
-      border-radius: 16px;
-      border: 1px solid rgba(212,175,55,.35);
+    /* ===== hero ===== */
+    .hero {
       background:
-        linear-gradient(160deg, rgba(25,78,58,.72), rgba(6,26,18,.96)),
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 35%),
-        radial-gradient(circle at 72% 35%, rgba(242,216,75,.30), transparent 42%);
-      padding: 1.3rem;
-      text-align: left;
-      color: #e8f7dd;
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,.55), transparent 40%),
+        linear-gradient(135deg, #ffe345 0%, var(--yellow) 55%, #f5c400 100%);
+      padding: 2.6rem 0 3rem;
+      border-bottom: 6px solid var(--green);
+    }
+    .hero-banner {
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.22);
+      border: 4px solid #fff;
+    }
+    .hero-copy { text-align: center; margin-top: 2rem; }
+    .hero-copy .tagline {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-weight: 800;
+      padding: .25rem 1.1rem;
+      border-radius: 999px;
       font-size: .95rem;
+      letter-spacing: .06em;
     }
-
-    .section { padding: 4rem 0 2rem; }
-    .grid { display: grid; gap: 1.2rem; }
-
-    .shop {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    .hero-copy h1 {
+      font-size: clamp(1.7rem, 4.6vw, 3rem);
+      margin: .7rem 0 .4rem;
+      color: var(--green-dark);
+      line-height: 1.35;
+      text-shadow: 0 2px 0 rgba(255,255,255,.6);
     }
-
-    .card {
-      background: var(--card);
-      border: 1px solid rgba(212,175,55,.28);
-      border-radius: 16px;
-      padding: 1.2rem;
+    .hero-copy p.sub {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      font-weight: 700;
+      color: #4a3f00;
+      margin: 0 0 1.4rem;
     }
+    .cta-row { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.02rem;
+      padding: .85rem 1.9rem;
+      border-radius: 999px;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 6px 0 rgba(0,0,0,.18);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-white { background: #fff; color: var(--green-dark); border: 2px solid var(--green); }
 
-    h2 { font-size: clamp(1.4rem, 2.5vw, 2.2rem); margin: 0 0 1rem; }
-    h3 { margin-top: 0; color: var(--accent-soft); }
-
-    .qa-controls {
+    /* ===== strengths band ===== */
+    .band {
+      background: var(--green-dark);
+      color: #fff;
+      padding: 1rem 0;
+    }
+    .band-inner {
       display: flex;
       flex-wrap: wrap;
-      gap: .8rem;
-      margin-bottom: 1rem;
-      align-items: center;
-    }
-
-    input, button {
-      border-radius: 999px;
-      border: 1px solid rgba(210,255,120,.40);
-      padding: .68rem 1rem;
+      justify-content: center;
+      gap: .6rem 1.6rem;
+      font-weight: 800;
       font-size: .95rem;
-      background: #0a241a;
-      color: var(--text);
+    }
+    .band-inner span::before { content: "✔ "; color: var(--yellow); }
+
+    /* ===== sections ===== */
+    .section { padding: 4rem 0 3.2rem; }
+    .section.alt { background: var(--yellow-soft); }
+    .sec-head { text-align: center; margin-bottom: 2.2rem; }
+    .sec-head .en {
+      color: var(--red);
+      font-weight: 800;
+      letter-spacing: .18em;
+      font-size: .8rem;
+      text-transform: uppercase;
+    }
+    .sec-head h2 {
+      font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+      margin: .2rem 0 0;
+      color: var(--green-dark);
+    }
+    .sec-head h2::after {
+      content: "";
+      display: block;
+      width: 64px;
+      height: 5px;
+      background: var(--yellow);
+      border-radius: 3px;
+      margin: .7rem auto 0;
     }
 
-    button {
-      cursor: pointer;
-      background: linear-gradient(90deg, #5abf4b, #f2d84b);
-      color: #092312;
-      font-weight: 700;
+    .about-lead {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.02rem;
+    }
+    .about-lead strong { color: var(--red); }
+
+    .grid { display: grid; gap: 1.2rem; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.5rem 1.4rem;
+      box-shadow: 0 6px 18px rgba(60,50,0,.06);
+    }
+    .card .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      margin-bottom: .8rem;
+    }
+    .card h3 { margin: 0 0 .5rem; color: var(--green-dark); font-size: 1.12rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    .reason-card { border-top: 6px solid var(--yellow); }
+    .reason-card .num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
     }
 
-    .qa-item { margin-bottom: .75rem; }
-    details {
-      background: #0f2a1f;
-      border: 1px solid rgba(212,175,55,.24);
+    /* ===== review ===== */
+    .review-score {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.6rem;
+    }
+    .score-big {
+      background: var(--green-dark);
+      color: #fff;
+      border-radius: 18px;
+      padding: 1.2rem 2.2rem;
+      text-align: center;
+    }
+    .score-big .num { font-size: 3rem; font-weight: 900; color: var(--yellow); line-height: 1.1; }
+    .score-big .stars { color: var(--yellow); letter-spacing: .1em; }
+    .score-items { display: flex; gap: .7rem; flex-wrap: wrap; justify-content: center; }
+    .score-item {
+      background: #fff;
+      border: 1px solid var(--line);
       border-radius: 12px;
+      padding: .6rem 1.1rem;
+      text-align: center;
+      min-width: 92px;
+    }
+    .score-item .v { font-weight: 900; color: var(--red); font-size: 1.2rem; }
+    .score-item .k { font-size: .8rem; color: var(--muted); }
+    .review-note { text-align: center; font-size: .82rem; color: var(--muted); }
+    blockquote.voice {
+      max-width: 680px;
+      margin: 1.4rem auto 0;
+      background: #fff;
+      border-left: 6px solid var(--green);
+      border-radius: 0 14px 14px 0;
+      padding: 1rem 1.3rem;
+      color: var(--ink);
+      font-size: .96rem;
+    }
+    blockquote.voice cite { display: block; margin-top: .4rem; color: var(--muted); font-size: .8rem; font-style: normal; }
+
+    /* ===== stock ===== */
+    .stock-box {
+      text-align: center;
+      background: linear-gradient(135deg, #ffe345, var(--yellow));
+      border-radius: 20px;
+      padding: 2.4rem 1.5rem;
+      border: 3px solid #fff;
+      box-shadow: 0 10px 30px rgba(60,50,0,.15);
+    }
+    .stock-box h3 { margin: 0 0 .5rem; font-size: 1.4rem; color: var(--green-dark); }
+    .stock-box p { margin: 0 0 1.3rem; font-weight: 700; color: #4a3f00; }
+
+    /* ===== shop info ===== */
+    .info-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+    .info-table th, .info-table td {
       padding: .85rem 1rem;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: .95rem;
     }
-
-    summary { cursor: pointer; font-weight: 700; color: #d5f59b; }
-    .article {
-      margin-top: .8rem;
-      background: rgba(0,0,0,.2);
-      border-radius: 10px;
-      padding: .8rem;
-      color: var(--muted);
-      white-space: pre-line;
+    .info-table tr:last-child th, .info-table tr:last-child td { border-bottom: none; }
+    .info-table th {
+      width: 8.5em;
+      background: var(--yellow-soft);
+      color: var(--green-dark);
+      white-space: nowrap;
     }
+    .info-table a { color: var(--red); font-weight: 700; }
+    .map-frame {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      border: 0;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(60,50,0,.1);
+    }
+    .info-note { font-size: .8rem; color: var(--muted); margin-top: .7rem; }
 
-    footer { padding: 2rem 0 4rem; color: #96b9a4; text-align: center; }
-    .badge { color: var(--ok); font-weight: 700; }
+    /* ===== contact cta ===== */
+    .contact-cta {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 3rem 0;
+    }
+    .contact-cta h2 { margin: 0 0 .4rem; font-size: clamp(1.3rem, 3vw, 1.9rem); }
+    .contact-cta .tel {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      margin: .3rem 0;
+    }
+    .contact-cta p { margin: .2rem 0; font-weight: 700; }
+
+    footer {
+      background: var(--green-dark);
+      color: #cfe8d6;
+      text-align: center;
+      padding: 1.6rem 0 2rem;
+      font-size: .85rem;
+    }
+    footer .foot-logo { font-weight: 900; color: #fff; font-size: 1.1rem; margin-bottom: .3rem; }
+
+    @media (max-width: 720px) {
+      nav.global { display: none; }
+      .header-tel small { display: none; }
+    }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="halo"></div>
-    <div class="hero-card wrap">
-      <img class="hero-image" src="images/hero.jpg" alt="カーコング ヘッダー画像">
-      <p class="lead">中古車選びの“悟り”を、あなたへ。</p>
-      <h1>カーコング<br>賢い消費者 お金を損しない車選び</h1>
-      <p>先進的で信頼感のある世界観で、ゴリラ賢者がサラリーマンへ「失敗しない中古車選び」の知恵を授けるLPです。</p>
-      <div class="painting">
-        <strong>ビジュアルコンセプト（実装イメージ）</strong><br>
-        グリーンのグラデーション・イエローのハイライト・知性あるゴリラ像・データを読むビジネスパーソン。<br>
-        「価格だけで決めない」「総額・保証・整備履歴で判断する」という教えを、物語として届けます。
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="#top"><span class="mark">🦍</span>カーコング</a>
+      <nav class="global">
+        <a href="#about">カーコングとは</a>
+        <a href="#service">サービス</a>
+        <a href="#reason">選ばれる理由</a>
+        <a href="#voice">クチコミ</a>
+        <a href="#stock">在庫情報</a>
+        <a href="#access">店舗・アクセス</a>
+      </nav>
+      <div class="header-tel">
+        <a href="tel:0489998070">048-999-8070</a><br />
+        <small>営業時間 10:30〜19:00</small>
       </div>
     </div>
   </header>
 
-  <section class="section wrap">
-    <h2>店舗情報（URL掲載情報をベースにした枠）</h2>
-    <div class="grid shop">
-      <article class="card"><h3>店舗名</h3><p>カーコング（掲載ページ準拠）</p></article>
-      <article class="card"><h3>取扱い</h3><p>中古車販売・相談・購入サポート</p></article>
-      <article class="card"><h3>こんな方へ</h3><p>初めての中古車購入で損したくない方／見積り比較が苦手な方</p></article>
-      <article class="card"><h3>訴求ポイント</h3><p>総額重視・維持費まで含めた提案・納得して買える説明力</p></article>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <img class="hero-banner" src="hero.png" alt="お金で損しない！賢い選択をして、未来を守ろう！カーコング" />
+      <div class="hero-copy">
+        <span class="tagline">埼玉県八潮市の中古車販売店</span>
+        <h1>お金で損しない、<br class="sp" />賢いクルマ選びを。</h1>
+        <p class="sub">自信を持っておすすめできる「特選車」だけを厳選。販売から買取・車検・修理まで、クルマのことは何でもカーコングにお任せください。</p>
+        <div class="cta-row">
+          <a class="btn btn-green" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">在庫車両を見る（グーネット）</a>
+          <a class="btn btn-red" href="tel:0489998070">📞 電話で相談する</a>
+          <a class="btn btn-white" href="#access">アクセスを見る</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section wrap">
-    <h2>Q&amp;A記事セクション（50件・仮）</h2>
-    <p>質問を開くと、<span class="badge">から記事自動生成</span>ボタンで本文ひな形を作成できます。運用時はこのひな形を編集して本記事化してください。</p>
-    <div class="qa-controls">
-      <input id="keyword" type="text" placeholder="例）保証 / ローン / 軽自動車" />
-      <button id="filterBtn">Q&amp;Aを絞り込み</button>
-      <button id="resetBtn">リセット</button>
+  <div class="band">
+    <div class="wrap band-inner">
+      <span>厳選した特選車のみ</span>
+      <span>販売・買取・車検・修理</span>
+      <span>カスタマイズ対応</span>
+      <span>八潮駅までお迎えOK</span>
     </div>
-    <div id="qaList"></div>
-    <article class="card" style="margin-top:1rem">
-      <h3>記事追記エリア（手動入力）</h3>
-      <p>Q&Aとは別に、自由な記事を追記できます。保存すると下に蓄積されます（ブラウザ保存）。</p>
-      <input id="manualTitle" type="text" placeholder="記事タイトル" style="width:100%; margin-bottom:.6rem; border-radius:12px" />
-      <textarea id="manualBody" placeholder="記事本文" style="width:100%; min-height:140px; background:#0a241a; color:#f5ffe9; border:1px solid rgba(210,255,120,.40); border-radius:12px; padding:.8rem"></textarea>
-      <p style="margin:.8rem 0 0; display:flex; gap:.6rem; flex-wrap:wrap">
-        <button id="saveManual">記事を保存</button>
-        <button id="clearManual">入力クリア</button>
+  </div>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">About</span>
+        <h2>カーコングとは</h2>
+      </div>
+      <p class="about-lead">
+        カーコング（運営：有限会社ティーエヌオートクラブ）は、埼玉県八潮市の中古車販売店です。<br />
+        お客様に<strong>自信を持っておすすめしたい特選車のみ</strong>を取り揃え、価格の安さだけでなく
+        「支払総額」「保証」「整備」まで含めて納得できるご提案をお約束します。<br />
+        お車の買取・販売・車検・修理・カスタマイズまで、クルマに関わることはすべてワンストップで対応いたします。
       </p>
-      <div id="manualList" style="margin-top:1rem"></div>
-    </article>
+    </div>
+  </section>
+
+  <section class="section alt" id="service">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Service</span>
+        <h2>サービス内容</h2>
+      </div>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="icon">🚗</div>
+          <h3>中古車販売</h3>
+          <p>状態・履歴を確認した特選車のみを展示。支払総額と維持費まで含めて、損をしない一台選びをサポートします。</p>
+        </article>
+        <article class="card">
+          <div class="icon">💰</div>
+          <h3>お車の買取</h3>
+          <p>お乗り換え・手放しのご相談も歓迎。大切に乗られてきたお車を適正価格で査定・買取いたします。</p>
+        </article>
+        <article class="card">
+          <div class="icon">🔧</div>
+          <h3>車検・点検</h3>
+          <p>ご購入後の車検・法定点検もお任せください。長く安心して乗り続けられるようしっかり整備します。</p>
+        </article>
+        <article class="card">
+          <div class="icon">🛠️</div>
+          <h3>修理・整備</h3>
+          <p>キズ・不調・消耗品交換などお車のトラブル全般に対応。まずはお気軽にご相談ください。</p>
+        </article>
+        <article class="card">
+          <div class="icon">✨</div>
+          <h3>カスタマイズ</h3>
+          <p>「自分だけの一台」に仕上げるカスタマイズも承ります。ご希望のスタイルをお聞かせください。</p>
+        </article>
+        <article class="card">
+          <div class="icon">💬</div>
+          <h3>購入相談・見積り</h3>
+          <p>初めての中古車購入で不安な方も大歓迎。予算やライフスタイルに合わせて分かりやすくご説明します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reason">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Reason</span>
+        <h2>カーコングが選ばれる3つの理由</h2>
+      </div>
+      <div class="grid grid-3">
+        <article class="card reason-card">
+          <div class="num">01</div>
+          <h3>「特選車」しか置かない</h3>
+          <p>台数を並べるのではなく、自信を持っておすすめできるお車だけを厳選。だから安心して選べます。</p>
+        </article>
+        <article class="card reason-card">
+          <div class="num">02</div>
+          <h3>総額・保証まで納得の説明</h3>
+          <p>車両価格だけでなく諸費用・保証・整備内容まで丁寧にご説明。「あとで損しない」買い方をご提案します。</p>
+        </article>
+        <article class="card reason-card">
+          <div class="num">03</div>
+          <h3>購入後もずっと頼れる</h3>
+          <p>車検・修理・カスタマイズまで対応するから、納車がゴールではなくお付き合いのスタート。カーライフを末永くサポートします。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="voice">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Voice</span>
+        <h2>お客様のクチコミ</h2>
+      </div>
+      <div class="review-score">
+        <div class="score-big">
+          <div class="num">4.8</div>
+          <div class="stars">★★★★★</div>
+          <div>クチコミ総合評価</div>
+        </div>
+        <div class="score-items">
+          <div class="score-item"><div class="v">4.8</div><div class="k">接客</div></div>
+          <div class="score-item"><div class="v">4.8</div><div class="k">雰囲気</div></div>
+          <div class="score-item"><div class="v">4.2</div><div class="k">品質</div></div>
+          <div class="score-item"><div class="v">4.0</div><div class="k">アフター</div></div>
+        </div>
+      </div>
+      <blockquote class="voice">
+        親切で丁寧、そして迅速な対応をしていただける良いお店です。安心してお任せできました。
+        <cite>― ご購入いただいたお客様の声（グーネット クチコミより）</cite>
+      </blockquote>
+      <p class="review-note">※評価はグーネット掲載のクチコミ（投稿時点）に基づきます。</p>
+    </div>
+  </section>
+
+  <section class="section" id="stock">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Stock</span>
+        <h2>在庫情報</h2>
+      </div>
+      <div class="stock-box">
+        <h3>最新の在庫はグーネットでチェック！</h3>
+        <p>厳選した特選車を随時掲載中。気になるお車はお電話でもすぐにご案内できます。</p>
+        <a class="btn btn-green" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">グーネットで在庫を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="access">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Access</span>
+        <h2>店舗情報・アクセス</h2>
+      </div>
+      <div class="grid grid-2">
+        <div>
+          <table class="info-table">
+            <tr><th>店舗名</th><td>カーコング</td></tr>
+            <tr><th>運営会社</th><td>有限会社ティーエヌオートクラブ</td></tr>
+            <tr><th>所在地</th><td>〒340-0814<br />埼玉県八潮市南川崎810-3</td></tr>
+            <tr><th>電話番号</th><td><a href="tel:0489998070">048-999-8070</a></td></tr>
+            <tr><th>営業時間</th><td>10:30〜19:00</td></tr>
+            <tr><th>定休日</th><td>水曜日（臨時休業の場合あり）</td></tr>
+            <tr><th>事業内容</th><td>中古車販売・買取・車検・修理・カスタマイズ</td></tr>
+            <tr>
+              <th>アクセス</th>
+              <td>
+                お車：首都高速6号三郷線「八潮」IC、または東京外環自動車道「三郷南」ICより<br />
+                電車：つくばエクスプレス「八潮」駅までお迎えにあがります
+              </td>
+            </tr>
+          </table>
+          <p class="info-note">※ご来店の際は、事前にお電話いただけるとスムーズにご案内できます。</p>
+        </div>
+        <div>
+          <iframe
+            class="map-frame"
+            src="https://maps.google.com/maps?q=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82%E5%8D%97%E5%B7%9D%E5%B4%8E810-3&z=15&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="カーコング（埼玉県八潮市南川崎810-3）の地図"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-cta">
+    <div class="wrap">
+      <h2>クルマのこと、まずはお気軽にご相談ください</h2>
+      <a class="tel" href="tel:0489998070">📞 048-999-8070</a>
+      <p>営業時間 10:30〜19:00／定休日 水曜日</p>
+    </div>
   </section>
 
   <footer>
-    <small>© CarKong LP Prototype | テーマ：賢い消費者 お金を損しない車選び</small>
+    <div class="wrap">
+      <div class="foot-logo">🦍 カーコング</div>
+      <div>埼玉県八潮市南川崎810-3｜有限会社ティーエヌオートクラブ</div>
+      <div>&copy; CarKong / T.N Auto Club Co., Ltd.</div>
+    </div>
   </footer>
 
-  <script>
-    const qaSeed = [
-      "中古車の『支払総額』は何を含み、どこを確認すべき？",
-      "安い車ほど得とは限らないのはなぜ？",
-      "年式・走行距離・修復歴の優先順位は？",
-      "見積り比較で最初に見るべき3項目は？",
-      "諸費用が高い店舗を見分ける方法は？",
-      "保証付き中古車を選ぶメリットは？",
-      "保証範囲で特に確認すべき部位は？",
-      "納車前整備はどこまで求めていい？",
-      "車検残ありの車は本当にお得？",
-      "点検記録簿の読み方を知りたい",
-      "事故歴と修復歴はどう違う？",
-      "ワンオーナー車は必ず安心？",
-      "購入後に想定外の出費が出るポイントは？",
-      "タイヤ交換時期の見抜き方は？",
-      "バッテリー劣化を現地で判断するには？",
-      "試乗時に必ず確認する項目は？",
-      "異音があったらどこまで交渉すべき？",
-      "雨の日に確認すべき車両ポイントは？",
-      "中古ハイブリッド車で注意する点は？",
-      "軽自動車と普通車、維持費差はどれくらい？",
-      "燃費表示を鵜呑みにしないコツは？",
-      "自動車税・重量税・保険料の基本を知りたい",
-      "任意保険の等級が購入判断に与える影響は？",
-      "ローン金利は何%差で損得が変わる？",
-      "残価設定ローンの注意点は？",
-      "現金一括とローン、どちらが得？",
-      "下取り価格を上げる準備は何をすべき？",
-      "買取査定と下取りの同時進行は必要？",
-      "相見積りは何社くらい取るべき？",
-      "オンライン商談で失敗しない方法は？",
-      "写真だけで判断してはいけない理由は？",
-      "遠方購入のリスク管理はどうする？",
-      "納車までのスケジュール管理術は？",
-      "契約前にキャンセル規定を確認すべき理由は？",
-      "クーリングオフは中古車購入で使える？",
-      "契約書の『特約』で見落としがちな箇所は？",
-      "名義変更トラブルを避けるには？",
-      "ETC・ドラレコ・ナビの付属確認ポイントは？",
-      "保証継承できるディーラー系中古車の利点は？",
-      "認定中古車と一般中古車の違いは？",
-      "ファミリー向け車選びで失敗しない条件は？",
-      "通勤用の最適車種を選ぶ考え方は？",
-      "雪国で使う中古車のチェック項目は？",
-      "海沿い地域の塩害リスクを見抜く方法は？",
-      "災害時に役立つ車選びの観点は？",
-      "リセールバリューを意識した買い方は？",
-      "売却時に損しないメンテ履歴管理とは？",
-      "購入初年度にやるべき予防整備は？",
-      "『今買うべきか待つべきか』の判断基準は？",
-      "信頼できる販売店を見抜く5つの質問とは？"
-    ];
-
-    const list = document.getElementById('qaList');
-
-    function buildArticle(question) {
-      const k = document.getElementById('keyword').value.trim() || '中古車選び';
-      return `【要点】\n${question}に対しては、価格の安さだけでなく総額・保証・整備履歴を同時に比較するのが基本です。\n\n【実践ステップ】\n1. 相見積りを2〜3件取得し、諸費用内訳を横並び比較する\n2. 契約前に保証対象と期間、除外条件を文書で確認する\n3. 納車後1年の維持費（税金・保険・消耗品）を試算する\n\n【カーコング視点】\nキーワード「${k}」に関連する相談では、“今安い”より“あとで損しない”を優先します。\n\n【まとめ】\n迷ったら「この1台を3年使った総コスト」で判断すると、失敗率を下げられます。`;
-    }
-
-    function render(items) {
-      list.innerHTML = '';
-      items.forEach((q, i) => {
-        const wrap = document.createElement('div');
-        wrap.className = 'qa-item';
-        wrap.innerHTML = `
-          <details>
-            <summary>Q${i + 1}. ${q}</summary>
-            <div class="article" id="article-${i}">（まだ記事はありません）</div>
-            <p style="margin:.8rem 0 0">
-              <button data-id="${i}" class="genBtn">から記事を生成</button>
-            </p>
-          </details>
-        `;
-        list.appendChild(wrap);
-      });
-
-      document.querySelectorAll('.genBtn').forEach(btn => {
-        btn.addEventListener('click', e => {
-          const id = Number(e.target.dataset.id);
-          const text = buildArticle(items[id]);
-          e.target.closest('details').querySelector('.article').textContent = text;
-        });
-      });
-    }
-
-    document.getElementById('filterBtn').addEventListener('click', () => {
-      const k = document.getElementById('keyword').value.trim();
-      if (!k) return render(qaSeed);
-      render(qaSeed.filter(q => q.includes(k)));
-    });
-
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      document.getElementById('keyword').value = '';
-      render(qaSeed);
-    });
-
-    const manualKey = 'carkong_manual_articles';
-
-    function loadManualArticles() {
-      try { return JSON.parse(localStorage.getItem(manualKey) || '[]'); }
-      catch { return []; }
-    }
-
-    function saveManualArticles(items) {
-      localStorage.setItem(manualKey, JSON.stringify(items));
-    }
-
-    function renderManualArticles() {
-      const area = document.getElementById('manualList');
-      const items = loadManualArticles();
-      if (!items.length) {
-        area.innerHTML = '<p style="color:#c9bddf">（まだ手動記事はありません）</p>';
-        return;
-      }
-      area.innerHTML = items.map((it, idx) => `
-        <details style="margin-bottom:.6rem">
-          <summary>記事${idx + 1}: ${it.title}</summary>
-          <div class="article">${it.body}</div>
-        </details>
-      `).join('');
-    }
-
-    document.getElementById('saveManual').addEventListener('click', () => {
-      const title = document.getElementById('manualTitle').value.trim();
-      const body = document.getElementById('manualBody').value.trim();
-      if (!title || !body) return alert('タイトルと本文を入力してください。');
-      const items = loadManualArticles();
-      items.unshift({ title, body });
-      saveManualArticles(items);
-      renderManualArticles();
-      document.getElementById('manualTitle').value = '';
-      document.getElementById('manualBody').value = '';
-    });
-
-    document.getElementById('clearManual').addEventListener('click', () => {
-      document.getElementById('manualTitle').value = '';
-      document.getElementById('manualBody').value = '';
-    });
-
-    renderManualArticles();
-    render(qaSeed);
-  </script>
 </body>
 </html>
