@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>あなたのオススメの一台は？かんたん診断｜カーコング</title>
+  <meta name="description" content="子どもの人数・年式のこだわり・重視ポイントを選ぶだけで、約180車種からあなたにピッタリの一台をゴリラ店長が診断！埼玉県八潮市の中古車販売店カーコング提供。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
+  <style>
+    :root {
+      --yellow: #ffd900;
+      --yellow-soft: #fff7cc;
+      --green: #1c7a3f;
+      --green-dark: #0f5229;
+      --red: #d7263d;
+      --ink: #21231f;
+      --paper: #fffdf5;
+      --muted: #5d6158;
+      --line: #e8e2c8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.7;
+    }
+    a { color: inherit; }
+    .wrap { width: min(760px, 94%); margin: 0 auto; padding: 1.2rem 0 2rem; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: #fff;
+      border-bottom: 4px solid var(--yellow);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: .7rem 0;
+      width: min(1080px, 92%); margin: 0 auto;
+    }
+    .logo {
+      white-space: nowrap; font-size: 1.4rem; font-weight: 900;
+      color: var(--green-dark); text-decoration: none;
+      display: flex; align-items: center; gap: .45rem;
+    }
+    .logo .mark { background: var(--yellow); border-radius: 8px; padding: .05rem .5rem; font-size: 1.2rem; }
+    nav.global { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    nav.global a { text-decoration: none; font-weight: 700; font-size: .92rem; color: var(--ink); }
+    nav.global a:hover { color: var(--green); }
+    .header-tel a { font-size: 1.2rem; font-weight: 900; color: var(--red); text-decoration: none; white-space: nowrap; }
+
+    .tool-head {
+      background: linear-gradient(135deg, #ffe345, var(--yellow));
+      border-bottom: 5px solid var(--green);
+      text-align: center;
+      padding: 1.3rem 1rem 1.1rem;
+    }
+    .tool-head h1 { margin: 0; font-size: clamp(1.2rem, 3.5vw, 1.7rem); color: var(--green-dark); }
+    .tool-head p { margin: .2rem 0 0; font-size: .85rem; font-weight: 700; color: #4a3f00; }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.2rem 1.2rem 1.4rem;
+      box-shadow: 0 6px 18px rgba(60,50,0,.07);
+      margin-bottom: 1.1rem;
+    }
+    .panel h2 { margin: 0 0 .3rem; font-size: 1.08rem; color: var(--green-dark); }
+    .panel .sub { margin: 0 0 .8rem; font-size: .8rem; color: var(--muted); }
+
+    .opts { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .opt {
+      border: 2px solid var(--green);
+      background: #fff;
+      color: var(--green-dark);
+      border-radius: 999px;
+      padding: .5rem 1.15rem;
+      font-size: .95rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .1s ease;
+    }
+    .opt:hover { transform: translateY(-1px); }
+    .opt.active { background: var(--green); color: #fff; }
+    .opt .em { font-size: 1.1rem; }
+
+    .go-row { text-align: center; margin: 1.6rem 0; }
+    .go-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--red), #f0563c);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 999px;
+      padding: 1rem 2.6rem;
+      cursor: pointer;
+      box-shadow: 0 6px 0 rgba(0,0,0,.18);
+      transition: transform .15s ease;
+    }
+    .go-btn:hover { transform: translateY(-2px); }
+
+    /* ===== 結果 ===== */
+    #resultArea { display: none; }
+    .result-head { text-align: center; margin: 1.4rem 0 1rem; }
+    .result-head h2 { color: var(--green-dark); font-size: 1.4rem; margin: 0; }
+    .result-head p { margin: .2rem 0 0; font-size: .85rem; color: var(--muted); font-weight: 700; }
+
+    .reco {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.2rem 1.3rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 22px rgba(60,50,0,.08);
+      position: relative;
+    }
+    .reco.first { border: 3px solid var(--yellow); box-shadow: 0 12px 30px rgba(60,50,0,.16); }
+    .reco .rank {
+      position: absolute;
+      top: -14px;
+      left: 14px;
+      font-size: 1.6rem;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,.2));
+    }
+    .reco .r-name { font-size: 1.15rem; font-weight: 900; color: var(--green-dark); margin: .2rem 0 .15rem; padding-left: 2.2rem; }
+    .tagrow { display: flex; gap: .35rem; flex-wrap: wrap; padding-left: 2.2rem; }
+    .tag {
+      font-size: .68rem; font-weight: 700; border-radius: 6px;
+      padding: .02rem .45rem;
+      background: #eef4ef; color: var(--green-dark); border: 1px solid #d4e4d8;
+      white-space: nowrap;
+    }
+    .tag.slide { background: #e7f0fd; color: #1c4f9c; border-color: #c9dcf7; }
+    .tag.now { background: var(--yellow-soft); color: #8a6d00; border-color: #efdf9a; }
+    .tag.used { background: #f1f1f1; color: #666; border-color: #ddd; }
+
+    .match { display: flex; align-items: center; gap: .6rem; margin: .7rem 0 .4rem; }
+    .match .bar { flex: 1; height: 12px; background: #f0ecdc; border-radius: 999px; overflow: hidden; }
+    .match .fill { height: 100%; background: linear-gradient(90deg, var(--green), #5abf4b); border-radius: 999px; }
+    .match .pct { font-weight: 900; color: var(--green-dark); font-size: .95rem; white-space: nowrap; }
+
+    .reasons { margin: .5rem 0 .6rem; padding: 0; list-style: none; font-size: .88rem; }
+    .reasons li { margin: .15rem 0; }
+    .reasons li::before { content: "✔ "; color: var(--green); font-weight: 900; }
+    .reco .memo {
+      background: var(--yellow-soft);
+      border-radius: 10px;
+      padding: .5rem .8rem;
+      font-size: .85rem;
+      margin: .5rem 0 .8rem;
+    }
+    .reco .memo::before { content: "🦍 店長メモ："; font-weight: 800; }
+    .r-btns { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; text-decoration: none;
+      font-weight: 800; font-size: .88rem;
+      padding: .55rem 1.2rem; border-radius: 999px;
+      box-shadow: 0 4px 0 rgba(0,0,0,.14);
+    }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-white { background: #fff; color: var(--green-dark); border: 2px solid var(--green); }
+
+    .retry-row { text-align: center; margin: 1.4rem 0; }
+    .disclaimer { font-size: .72rem; color: var(--muted); margin-top: 1rem; text-align: center; }
+
+    footer {
+      background: var(--green-dark); color: #cfe8d6;
+      text-align: center; padding: 1.6rem 0 2rem;
+      font-size: .85rem; margin-top: 2rem;
+    }
+    footer .foot-logo { font-weight: 900; color: #fff; font-size: 1.1rem; margin-bottom: .3rem; }
+    footer a { color: var(--yellow); }
+
+    .mobile-cta {
+      display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.18);
+    }
+    .mobile-cta a {
+      flex: 1; text-align: center; text-decoration: none;
+      font-weight: 800; font-size: .95rem; padding: .95rem .5rem; color: #fff;
+    }
+    .mobile-cta .m-tel { background: var(--red); }
+    .mobile-cta .m-stock { background: var(--green); }
+
+    @media (max-width: 720px) {
+      nav.global { display: none; }
+      .mobile-cta { display: flex; }
+      body { padding-bottom: 3.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><span class="mark">🦍</span>カーコング</a>
+      <nav class="global">
+        <a href="index.html">ホーム</a>
+        <a href="qa.html">Q&amp;A記事 100選</a>
+        <a href="zukan.html">自動車図鑑</a>
+        <a href="cargo-fit-checker.html">荷室チェッカー</a>
+        <a href="cost-simulator.html">維持費シミュレーター</a>
+      </nav>
+      <div class="header-tel"><a href="tel:0078-6044-8121">0078-6044-8121</a></div>
+    </div>
+  </header>
+
+  <div class="tool-head">
+    <h1>🦍 あなたのオススメの一台は？</h1>
+    <p>3つ選ぶだけ・約10秒。約180車種からゴリラ店長がピッタリの一台を診断します！</p>
+  </div>
+
+  <div class="wrap">
+
+    <div class="panel">
+      <h2>Q1. お子さまの人数は？</h2>
+      <p class="sub">これから増える予定があれば、多いほうに合わせるのがおすすめです。</p>
+      <div class="opts" id="qKids">
+        <button class="opt" data-v="0"><span class="em">🚗</span> いない</button>
+        <button class="opt active" data-v="1"><span class="em">👶</span> 1人</button>
+        <button class="opt" data-v="2"><span class="em">👧👦</span> 2人</button>
+        <button class="opt" data-v="3"><span class="em">👨‍👩‍👧‍👦</span> 3人以上</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Q2. 年式（販売からの年数）のこだわりは？</h2>
+      <p class="sub">新しいほど装備は充実、年数が経つほど価格はお手頃になります。</p>
+      <div class="opts" id="qAge">
+        <button class="opt" data-v="new"><span class="em">✨</span> 高年式がいい（3年落ち以内）</button>
+        <button class="opt active" data-v="mid"><span class="em">⚖️</span> バランス重視（8年落ちくらいまで）</button>
+        <button class="opt" data-v="any"><span class="em">💰</span> 古くてもOK！コスパ最優先</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Q3. 気にするポイントは？（いくつでも）</h2>
+      <p class="sub">タップで選択／もう一度タップで解除できます。</p>
+      <div class="opts" id="qPoints">
+        <button class="opt" data-v="interior">🛋️ 内装の充実・質感</button>
+        <button class="opt" data-v="conv">🎛️ 便利装備が多い</button>
+        <button class="opt" data-v="rearac">❄️ エアコンが後ろにもある</button>
+        <button class="opt" data-v="seat">🪑 シートアレンジが豊富</button>
+        <button class="opt" data-v="drive">🏁 走りがいい</button>
+        <button class="opt" data-v="slide">🚪 スライドドア</button>
+        <button class="opt" data-v="eco">⛽ 燃費・維持費</button>
+        <button class="opt" data-v="cargo">📦 荷物がたくさん積める</button>
+      </div>
+    </div>
+
+    <div class="go-row">
+      <button class="go-btn" id="goBtn">🦍 診断する！</button>
+    </div>
+
+    <div id="resultArea">
+      <div class="result-head">
+        <h2 id="resultTitle">🎉 あなたにオススメの3台はこちら！</h2>
+        <p id="resultSub"></p>
+      </div>
+      <div id="resultList"></div>
+      <div class="retry-row">
+        <button class="go-btn" id="retryBtn" style="background:linear-gradient(90deg,var(--green),#3f9e5f); font-size:1rem; padding:.8rem 2rem;">条件を変えてもう一度</button>
+      </div>
+      <p class="disclaimer">※診断は図鑑データ（代表グレードの参考値と当店の評価目安）に基づく簡易マッチングです。装備はグレード・年式により異なります。最適な一台選びは、ぜひお電話・ご来店でご相談ください。</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="wrap" style="padding:0;">
+      <div class="foot-logo">🦍 カーコング</div>
+      <div>埼玉県八潮市南川崎810-3｜有限会社ティーエヌオートクラブ</div>
+      <div><a href="index.html">ホームへ戻る</a>｜<a href="zukan.html">自動車図鑑</a>｜<a href="qa.html">Q&amp;A記事 100選</a></div>
+      <div>&copy; CarKong / T.N Auto Club Co., Ltd.</div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta">
+    <a class="m-tel" href="tel:0078-6044-8121">📞 電話で相談（通話無料）</a>
+    <a class="m-stock" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">🚗 在庫を見る</a>
+  </div>
+
+  <script src="cars-data.js"></script>
+  <script>
+    const THIS_YEAR = 2026;
+    const cars = window.CARS_RAW.map(r => {
+      const sc = window.CAR_SCORES[r[0]] || [3,3,1,3,3,3];
+      const current = r[1].includes('現行');
+      const endYear = current ? THIS_YEAR : Number((r[1].match(/〜(\d{4})/) || [0, THIS_YEAR])[1]);
+      const vol = r[8][0] * r[8][1] * r[8][2] / 1000; // リットル目安
+      return {
+        name: r[0], period: r[1], cat: r[2], type: r[3], seats: r[5],
+        slide: r[6], slideNote: r[7], dims: r[8], memo: r[9],
+        current, minAge: THIS_YEAR - endYear,
+        interior: sc[0], conv: sc[1], rearac: sc[2], seat: sc[3], drive: sc[4], eco: sc[5],
+        cargo: vol > 500 ? 5 : vol > 350 ? 4 : vol > 250 ? 3 : vol > 150 ? 2 : 1,
+        slideScore: r[6] === 'both' ? 5 : r[6] === 'one' ? 3 : 0
+      };
+    });
+
+    // ---- 選択UI ----
+    function setupSingle(id) {
+      const box = document.getElementById(id);
+      box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+        box.querySelectorAll('.opt').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+      }));
+    }
+    setupSingle('qKids');
+    setupSingle('qAge');
+    document.querySelectorAll('#qPoints .opt').forEach(b =>
+      b.addEventListener('click', () => b.classList.toggle('active')));
+
+    const POINT_LABEL = {
+      interior: '内装の充実', conv: '便利装備', rearac: '後席エアコン・送風',
+      seat: 'シートアレンジ', drive: '走り', slide: 'スライドドア',
+      eco: '燃費・維持費', cargo: '積載力'
+    };
+
+    function diagnose() {
+      const kids = Number(document.querySelector('#qKids .active').dataset.v);
+      const age = document.querySelector('#qAge .active').dataset.v;
+      const points = [...document.querySelectorAll('#qPoints .active')].map(b => b.dataset.v);
+
+      let pool = cars.filter(c => {
+        if (age === 'new' && c.minAge > 3) return false;
+        if (age === 'mid' && c.minAge > 8) return false;
+        if (kids >= 3 && c.seats === '4人') return false; // 軽は5人乗れない
+        if (kids >= 1 && c.seats === '2人') return false;  // 2シーターは除外
+        return true;
+      });
+
+      const judged = pool.map(c => {
+        // 基礎点：車としての総合力（僅差の順位付けに効く）
+        let score = (c.interior + c.conv + c.eco + c.drive) * 0.5;
+        const reasons = [];
+
+        // 子どもの人数
+        if (kids >= 1) {
+          if (c.slide === 'both') { score += kids >= 2 ? 10 : 6; reasons.push('両側スライドドアで毎日の乗せ降ろしがラク'); }
+          else if (c.slide === 'one') { score += 3; }
+          if (c.type.includes('スーパーハイト')) { score += 3; reasons.push('背が高くチャイルドシートの乗せ降ろしがしやすい'); }
+        }
+        if (kids >= 2) {
+          if (c.cat === 'minivan') { score += 6; reasons.push('家族が増えても余裕のミニバン空間'); }
+          if (/[78]人/.test(c.seats)) score += 2;
+        }
+        if (kids >= 3) {
+          if (/[78]人/.test(c.seats)) { score += 8; reasons.push('3列シートで家族全員＋荷物もOK'); }
+          else score -= 4;
+        }
+        if (kids === 0 && ['suv','sedan','compact','sport','neo','import'].includes(c.cat)) score += 2;
+        if (kids >= 2 && (c.cat === 'sport' || c.cat === 'neo')) score -= 6;
+
+        // 年式・コスパ
+        if (age === 'any' && !c.current) { score += 3; reasons.push('年数が経ったぶん中古価格がお手頃'); }
+        if (age === 'new' && c.current) score += 2;
+
+        // 気にするポイント
+        points.forEach(p => {
+          const v = p === 'slide' ? c.slideScore : c[p];
+          score += v * 3;
+          if (v >= 4) reasons.push(`${POINT_LABEL[p]}が高評価（★${v}）`);
+        });
+
+        return { ...c, score, reasons: [...new Set(reasons)].slice(0, 4) };
+      });
+
+      judged.sort((a, b) => b.score - a.score);
+      const top = judged.slice(0, 3);
+      const max = top[0]?.score || 1;
+
+      const medal = ['🥇', '🥈', '🥉'];
+      document.getElementById('resultList').innerHTML = top.map((c, i) => `
+        <div class="reco ${i === 0 ? 'first' : ''}">
+          <span class="rank">${medal[i]}</span>
+          <div class="r-name">${c.name}</div>
+          <div class="tagrow">
+            <span class="tag">${c.type}</span>
+            <span class="tag ${c.current ? 'now' : 'used'}">${c.current ? '現行モデル' : '中古で探す（' + c.period + '）'}</span>
+            ${c.slide === 'both' ? '<span class="tag slide">🚪両側スライド</span>' : c.slide === 'one' ? '<span class="tag slide">🚪片側スライド</span>' : ''}
+            <span class="tag">${c.seats}乗り</span>
+          </div>
+          <div class="match">
+            <div class="bar"><div class="fill" style="width:${Math.max(30, Math.round(c.score / max * 100))}%"></div></div>
+            <span class="pct">マッチ度 ${Math.max(30, Math.round(c.score / max * 100))}%</span>
+          </div>
+          <ul class="reasons">${c.reasons.map(r => `<li>${r}</li>`).join('')}</ul>
+          <div class="memo">${c.memo}</div>
+          <div class="r-btns">
+            <a class="btn btn-white" href="zukan.html">📖 図鑑で詳しく見る</a>
+            <a class="btn btn-red" href="tel:0078-6044-8121">📞 この車の在庫を聞く</a>
+            <a class="btn btn-green" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">🚗 在庫一覧を見る</a>
+          </div>
+        </div>
+      `).join('') || '<p style="text-align:center; color:var(--muted)">条件に合う車が見つかりませんでした。条件をゆるめてもう一度お試しください。</p>';
+
+      const kidsLabel = ['お子さまなし', 'お子さま1人', 'お子さま2人', 'お子さま3人以上'][kids];
+      const ageLabel = { new: '高年式重視', mid: 'バランス重視', any: 'コスパ最優先' }[age];
+      const pLabel = points.length ? points.map(p => POINT_LABEL[p]).join('・') : 'おまかせ';
+      document.getElementById('resultSub').textContent = `条件：${kidsLabel}／${ageLabel}／重視：${pLabel}`;
+
+      document.getElementById('resultArea').style.display = 'block';
+      document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('goBtn').addEventListener('click', diagnose);
+    document.getElementById('retryBtn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

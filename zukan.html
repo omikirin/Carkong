@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>自動車図鑑（現行車から名車・輸入車まで約180車種）｜カーコング</title>
+  <meta name="description" content="現行モデル＋過去10年の人気車にネオクラシックの名車・輸入車も加えた約180車種を収録した自動車図鑑。スライドドアの両側/片側・電動のグレード展開、ボディサイズ、乗車定員、荷室目安まで一覧できます。埼玉県八潮市の中古車販売店カーコング提供。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
+  <style>
+    :root {
+      --yellow: #ffd900;
+      --yellow-soft: #fff7cc;
+      --green: #1c7a3f;
+      --green-dark: #0f5229;
+      --red: #d7263d;
+      --ink: #21231f;
+      --paper: #fffdf5;
+      --muted: #5d6158;
+      --line: #e8e2c8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.7;
+    }
+    a { color: inherit; }
+    .wrap { width: min(880px, 94%); margin: 0 auto; padding: 1.2rem 0 2rem; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #fff;
+      border-bottom: 4px solid var(--yellow);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .7rem 0;
+      width: min(1080px, 92%);
+      margin: 0 auto;
+    }
+    .logo {
+      white-space: nowrap;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--green-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .logo .mark { background: var(--yellow); border-radius: 8px; padding: .05rem .5rem; font-size: 1.2rem; }
+    nav.global { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    nav.global a { text-decoration: none; font-weight: 700; font-size: .92rem; color: var(--ink); }
+    nav.global a:hover { color: var(--green); }
+    .header-tel a { font-size: 1.2rem; font-weight: 900; color: var(--red); text-decoration: none; white-space: nowrap; }
+
+    .tool-head {
+      background: linear-gradient(135deg, #ffe345, var(--yellow));
+      border-bottom: 5px solid var(--green);
+      text-align: center;
+      padding: 1.3rem 1rem 1.1rem;
+    }
+    .tool-head h1 { margin: 0; font-size: clamp(1.2rem, 3.5vw, 1.7rem); color: var(--green-dark); }
+    .tool-head p { margin: .2rem 0 0; font-size: .85rem; font-weight: 700; color: #4a3f00; }
+
+    .controls {
+      position: sticky;
+      top: 62px;
+      z-index: 40;
+      background: rgba(255,253,245,.96);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid var(--line);
+      padding: .8rem 0;
+    }
+    .controls-inner { display: flex; flex-direction: column; gap: .55rem; }
+    #zsearch {
+      width: 100%;
+      border: 2px solid var(--green);
+      border-radius: 999px;
+      padding: .55rem 1.1rem;
+      font-size: .98rem;
+      background: #fff;
+      color: var(--ink);
+    }
+    .chips { display: flex; gap: .45rem; flex-wrap: wrap; }
+    .chip {
+      border: 1.5px solid var(--green);
+      background: #fff;
+      color: var(--green-dark);
+      border-radius: 999px;
+      padding: .25rem .85rem;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .chip.active { background: var(--green); color: #fff; }
+    .toggles { display: flex; gap: 1.1rem; flex-wrap: wrap; font-size: .85rem; font-weight: 700; }
+    .toggles label { display: flex; align-items: center; gap: .35rem; cursor: pointer; color: var(--green-dark); }
+    .toggles input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; }
+    .hit-count { font-size: .8rem; color: var(--muted); }
+
+    .cat-section { padding: 1.8rem 0 .4rem; }
+    .cat-section h2 {
+      color: var(--green-dark);
+      font-size: 1.3rem;
+      border-left: 8px solid var(--yellow);
+      padding-left: .7rem;
+      margin: 0 0 1rem;
+    }
+    .car-list { display: grid; gap: .7rem; }
+
+    details.car {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--green);
+      border-radius: 14px;
+      padding: .85rem 1.1rem;
+      box-shadow: 0 4px 14px rgba(60,50,0,.05);
+    }
+    details.car summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      flex-wrap: wrap;
+    }
+    details.car summary::-webkit-details-marker { display: none; }
+    details.car summary::after {
+      content: "▼";
+      margin-left: auto;
+      font-size: .7rem;
+      color: var(--muted);
+      transition: transform .2s ease;
+    }
+    details.car[open] summary::after { transform: rotate(180deg); }
+    .car .name { font-weight: 800; font-size: 1rem; color: var(--green-dark); }
+    .tagrow { display: flex; gap: .35rem; flex-wrap: wrap; }
+    .tag {
+      font-size: .68rem;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: .02rem .45rem;
+      background: #eef4ef;
+      color: var(--green-dark);
+      border: 1px solid #d4e4d8;
+      white-space: nowrap;
+    }
+    .tag.slide { background: #e7f0fd; color: #1c4f9c; border-color: #c9dcf7; }
+    .tag.now { background: var(--yellow-soft); color: #8a6d00; border-color: #efdf9a; }
+    .tag.used { background: #f1f1f1; color: #666; border-color: #ddd; }
+
+    .spec {
+      margin-top: .8rem;
+      border-top: 1px dashed var(--line);
+      padding-top: .7rem;
+      font-size: .85rem;
+      display: grid;
+      gap: .3rem;
+    }
+    .spec .row { display: grid; grid-template-columns: 9em 1fr; gap: .5rem; }
+    .spec .k { color: var(--muted); font-weight: 700; }
+    .spec .memo { background: var(--yellow-soft); border-radius: 8px; padding: .5rem .8rem; margin-top: .35rem; }
+    .spec .memo::before { content: "🦍 "; }
+
+    .disclaimer { font-size: .72rem; color: var(--muted); margin-top: 1.4rem; text-align: center; }
+    .cta {
+      text-align: center;
+      background: var(--yellow-soft);
+      border: 2px dashed var(--green);
+      border-radius: 14px;
+      padding: 1rem;
+      font-size: .9rem;
+      font-weight: 700;
+      margin-top: 1.4rem;
+    }
+    .cta a { color: var(--red); }
+
+    footer {
+      background: var(--green-dark);
+      color: #cfe8d6;
+      text-align: center;
+      padding: 1.6rem 0 2rem;
+      font-size: .85rem;
+      margin-top: 2rem;
+    }
+    footer .foot-logo { font-weight: 900; color: #fff; font-size: 1.1rem; margin-bottom: .3rem; }
+    footer a { color: var(--yellow); }
+
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 45;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.18);
+    }
+    .mobile-cta a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: .95rem;
+      padding: .95rem .5rem;
+      color: #fff;
+    }
+    .mobile-cta .m-tel { background: var(--red); }
+    .mobile-cta .m-stock { background: var(--green); }
+
+    @media (max-width: 720px) {
+      nav.global { display: none; }
+      .mobile-cta { display: flex; }
+      body { padding-bottom: 3.4rem; }
+      .spec .row { grid-template-columns: 7em 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><span class="mark">🦍</span>カーコング</a>
+      <nav class="global">
+        <a href="index.html">ホーム</a>
+        <a href="qa.html">Q&amp;A記事 100選</a>
+        <a href="recommend.html">オススメ診断</a>
+        <a href="cargo-fit-checker.html">荷室チェッカー</a>
+        <a href="cost-simulator.html">維持費シミュレーター</a>
+        <a href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">在庫情報</a>
+      </nav>
+      <div class="header-tel"><a href="tel:0078-6044-8121">0078-6044-8121</a></div>
+    </div>
+  </header>
+
+  <div class="tool-head">
+    <h1>🦍 カーコング自動車図鑑</h1>
+    <p>約180車種を収録。軽からミニバン・SUV・スポーツ・ネオクラシック・輸入車まで、スライドドア（両側／片側・電動のグレード展開）、ボディサイズ、荷室目安まで丸わかり！</p>
+  </div>
+
+  <div class="controls">
+    <div class="wrap controls-inner" style="padding: 0; width: min(880px, 94%);">
+      <input id="zsearch" type="search" placeholder="車名で探す（例：N-BOX／セレナ／ハリアー）" />
+      <div class="chips" id="catChips"></div>
+      <div class="toggles">
+        <label><input type="checkbox" id="onlyCurrent" /> 現行モデルのみ</label>
+        <label><input type="checkbox" id="onlySlide" /> スライドドア車のみ</label>
+        <span class="hit-count" id="hitCount"></span>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" id="zukanRoot"></main>
+
+  <div class="wrap" style="padding-top:0;">
+    <div class="cta">
+      気になる車種があったら、在庫や入荷予定をお気軽にご相談ください！<br />
+      <a href="tel:0078-6044-8121">📞 0078-6044-8121（通話無料）</a> ｜ カーコング（埼玉県八潮市）
+    </div>
+    <p class="disclaimer">※寸法・装備・スライドドアの設定は代表的なグレードの参考目安です（年式・グレードにより異なります）。荷室寸法は「後席使用時」基準。正確な仕様は各メーカー公式情報・現車にてご確認ください。<br />📦 荷物が積めるかの判定は <a href="cargo-fit-checker.html" style="color:var(--red); font-weight:700;">荷室フィットチェッカー</a> でどうぞ。</p>
+  </div>
+
+  <footer>
+    <div class="wrap" style="padding:0;">
+      <div class="foot-logo">🦍 カーコング</div>
+      <div>埼玉県八潮市南川崎810-3｜有限会社ティーエヌオートクラブ</div>
+      <div><a href="index.html">ホームへ戻る</a>｜<a href="qa.html">Q&amp;A記事 100選</a>｜<a href="cargo-fit-checker.html">荷室チェッカー</a></div>
+      <div>&copy; CarKong / T.N Auto Club Co., Ltd.</div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta">
+    <a class="m-tel" href="tel:0078-6044-8121">📞 電話で相談（通話無料）</a>
+    <a class="m-stock" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">🚗 在庫を見る</a>
+  </div>
+
+  <script src="cars-data.js"></script>
+  <script>
+    const cars = window.CARS_RAW.map(r => ({
+      name: r[0], period: r[1], cat: r[2], type: r[3], size: r[4], seats: r[5],
+      slide: r[6], slideNote: r[7], dims: r[8], memo: r[9],
+      current: r[1].includes('現行')
+    }));
+
+    const CATS = [
+      { key: 'kei', label: '軽自動車', icon: '🚗' },
+      { key: 'compact', label: 'コンパクトカー', icon: '🚙' },
+      { key: 'minivan', label: 'ミニバン', icon: '🚐' },
+      { key: 'suv', label: 'SUV', icon: '🏔️' },
+      { key: 'sedan', label: 'セダン・ワゴン', icon: '🛣️' },
+      { key: 'sport', label: 'スポーツ', icon: '🏎️' },
+      { key: 'neo', label: 'ネオクラシック', icon: '🕰️' },
+      { key: 'import', label: '輸入車', icon: '🌍' }
+    ];
+
+    let activeCat = 'all';
+    const $root = document.getElementById('zukanRoot');
+    const $chips = document.getElementById('catChips');
+    const $search = document.getElementById('zsearch');
+    const $hit = document.getElementById('hitCount');
+
+    [{ key: 'all', label: 'すべて' }, ...CATS].forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (c.key === 'all' ? ' active' : '');
+      b.textContent = c.label;
+      b.addEventListener('click', () => {
+        activeCat = c.key;
+        $chips.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      });
+      $chips.appendChild(b);
+    });
+
+    const slideTag = c =>
+      c.slide === 'both' ? '<span class="tag slide">🚪両側スライド</span>' :
+      c.slide === 'one' ? '<span class="tag slide">🚪片側スライド</span>' : '';
+
+    function card(c) {
+      return `
+        <details class="car">
+          <summary>
+            <span class="name">${c.name}</span>
+            <span class="tagrow">
+              <span class="tag">${c.type}</span>
+              <span class="tag ${c.current ? 'now' : 'used'}">${c.current ? '現行モデル' : '中古で探す'}</span>
+              ${slideTag(c)}
+            </span>
+          </summary>
+          <div class="spec">
+            <div class="row"><span class="k">販売期間</span><span>${c.period}</span></div>
+            <div class="row"><span class="k">ボディサイズ</span><span>全長×全幅×全高：${c.size} cm（目安）</span></div>
+            <div class="row"><span class="k">乗車定員</span><span>${c.seats}</span></div>
+            <div class="row"><span class="k">スライドドア</span><span>${c.slideNote}</span></div>
+            <div class="row"><span class="k">荷室目安</span><span>幅${c.dims[0]}×奥行${c.dims[1]}×高さ${c.dims[2]} cm（後席使用時）</span></div>
+            <div class="memo">${c.memo}</div>
+          </div>
+        </details>`;
+    }
+
+    function render() {
+      const kw = $search.value.trim().toLowerCase();
+      const onlyCur = document.getElementById('onlyCurrent').checked;
+      const onlySlide = document.getElementById('onlySlide').checked;
+
+      const match = c =>
+        (activeCat === 'all' || c.cat === activeCat) &&
+        (!onlyCur || c.current) &&
+        (!onlySlide || c.slide !== 'none') &&
+        (!kw || (c.name + c.type + c.period + c.memo).toLowerCase().includes(kw));
+
+      let total = 0;
+      $root.innerHTML = CATS.map(cat => {
+        const list = cars.filter(c => c.cat === cat.key && match(c));
+        total += list.length;
+        if (!list.length) return '';
+        return `
+          <section class="cat-section">
+            <h2>${cat.icon} ${cat.label}（${list.length}車種）</h2>
+            <div class="car-list">${list.map(card).join('')}</div>
+          </section>`;
+      }).join('') || '<p style="padding:2rem 0; color:var(--muted)">該当する車種がありません。</p>';
+
+      $hit.textContent = `${total} / ${cars.length} 車種を表示中`;
+    }
+
+    $search.addEventListener('input', render);
+    document.getElementById('onlyCurrent').addEventListener('change', render);
+    document.getElementById('onlySlide').addEventListener('change', render);
+    render();
+  </script>
+
+</body>
+</html>

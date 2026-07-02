@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>荷室フィットチェッカー｜カーコング</title>
-  <meta name="description" content="ベビーカーやスーツケースの寸法を入力すると、人気ファミリーカーの荷室に積めそうか目安判定するツール。埼玉県八潮市の中古車販売店カーコング提供。" />
+  <meta name="description" content="ベビーカーやスーツケースの寸法を入力すると、国産の現行＋過去10年モデルに名車・輸入車も加えた約180車種の荷室に積めそうか目安判定するツール。埼玉県八潮市の中古車販売店カーコング提供。" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
   <style>
     :root {
@@ -118,6 +118,25 @@
     .cta a { color: var(--red); }
     .disclaimer { font-size: .72rem; color: var(--muted); margin-top: 1rem; text-align: center; }
 
+    /* ===== タグ・トグル ===== */
+    .tagrow { display: flex; gap: .35rem; flex-wrap: wrap; margin-top: .15rem; }
+    .tag {
+      font-size: .68rem;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: .02rem .45rem;
+      background: #eef4ef;
+      color: var(--green-dark);
+      border: 1px solid #d4e4d8;
+    }
+    .tag.slide { background: #e7f0fd; color: #1c4f9c; border-color: #c9dcf7; }
+    .tag.now { background: var(--yellow-soft); color: #8a6d00; border-color: #efdf9a; }
+    .tag.used { background: #f1f1f1; color: #666; border-color: #ddd; }
+    .toggles { display: flex; gap: 1.1rem; flex-wrap: wrap; margin-bottom: .7rem; font-size: .85rem; font-weight: 700; }
+    .toggles label { display: flex; align-items: center; gap: .35rem; cursor: pointer; color: var(--green-dark); }
+    .toggles input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; }
+
+
     /* ===== site header / footer ===== */
     .site-header {
       position: sticky;
@@ -137,6 +156,7 @@
       margin: 0 auto;
     }
     .logo {
+      white-space: nowrap;
       font-size: 1.4rem;
       font-weight: 900;
       color: var(--green-dark);
@@ -196,6 +216,8 @@
       <nav class="global">
         <a href="index.html">ホーム</a>
         <a href="qa.html">Q&amp;A記事 100選</a>
+        <a href="recommend.html">オススメ診断</a>
+        <a href="zukan.html">自動車図鑑</a>
         <a href="cost-simulator.html">維持費シミュレーター</a>
         <a href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">在庫情報</a>
         <a href="index.html#access">店舗・アクセス</a>
@@ -206,7 +228,7 @@
 
   <div class="tool-head">
     <h1>🦍 荷室フィットチェッカー</h1>
-    <p>ベビーカー、積めるかな？ 荷物のサイズから積めそうな車をチェック！</p>
+    <p>ベビーカー、積めるかな？ 名車・輸入車も含む約180車種から積めそうな車をチェック！</p>
   </div>
 
   <div class="wrap">
@@ -233,8 +255,15 @@
 
     <div class="panel">
       <h2>2. 判定結果 <span id="summary" style="font-size:.8rem; color:var(--muted); font-weight:700"></span></h2>
+      <div class="presets" id="carCats" style="margin-bottom:.6rem;"></div>
+      <div class="toggles">
+        <label><input type="checkbox" id="onlyCurrent" /> 現行モデルのみ</label>
+        <label><input type="checkbox" id="onlySlide" /> スライドドア車のみ</label>
+      </div>
+      <input id="carSearch" type="search" placeholder="車名で探す（例：N-BOX／シエンタ）"
+        style="width:100%; border:2px solid var(--green); border-radius:999px; padding:.5rem 1rem; font-size:.95rem; margin-bottom:.9rem; background:#fff; color:var(--ink);" />
       <div class="car-list" id="carList"></div>
-      <p class="disclaimer">※荷室寸法は代表的なグレードの参考目安値です（年式・グレード・シート位置で変わります）。「後席使用時」の荷室を基準にしています。実際の積載可否は実車でご確認ください。ご来店時の「試し積み」大歓迎です！</p>
+      <p class="disclaimer">※荷室寸法は代表的なグレードの参考目安値です（年式・グレード・シート位置で変わります）。「後席使用時」の荷室を基準にしています。実際の積載可否は実車でご確認ください。ご来店時の「試し積み」大歓迎です！<br />🚗 各車種の詳しい情報（スライドドアのグレード展開・ボディサイズなど）は <a href="zukan.html" style="color:var(--red); font-weight:700;">自動車図鑑</a> をご覧ください。</p>
     </div>
 
     <div class="cta">
@@ -244,27 +273,25 @@
 
   </div>
 
+  <script src="cars-data.js"></script>
   <script>
-    // 荷室の参考目安値（cm）: [幅, 奥行(後席使用時), 高さ]
-    const cars = [
-      { name: 'ホンダ N-BOX', type: '軽スーパーハイト', dims: [110, 45, 112] },
-      { name: 'ダイハツ タント', type: '軽スーパーハイト', dims: [109, 42, 110] },
-      { name: 'スズキ スペーシア', type: '軽スーパーハイト', dims: [100, 44, 109] },
-      { name: 'スズキ ワゴンR', type: '軽ハイトワゴン', dims: [98, 40, 90] },
-      { name: 'トヨタ ルーミー', type: 'コンパクトトール', dims: [100, 52, 110] },
-      { name: 'トヨタ シエンタ', type: 'コンパクトミニバン', dims: [120, 55, 105] },
-      { name: 'ホンダ フリード', type: 'コンパクトミニバン', dims: [108, 50, 110] },
-      { name: 'トヨタ ヤリス', type: 'コンパクトカー', dims: [100, 60, 75] },
-      { name: 'ホンダ フィット', type: 'コンパクトカー', dims: [100, 65, 80] },
-      { name: 'トヨタ カローラツーリング', type: 'ステーションワゴン', dims: [105, 85, 70] },
-      { name: 'トヨタ ノア／ヴォクシー', type: 'ミドルミニバン', dims: [120, 60, 110] },
-      { name: '日産 セレナ', type: 'ミドルミニバン', dims: [120, 55, 112] },
-      { name: 'ホンダ ステップワゴン', type: 'ミドルミニバン', dims: [125, 60, 112] },
-      { name: 'トヨタ アルファード', type: 'ラージミニバン', dims: [115, 65, 105] },
-      { name: 'トヨタ ライズ', type: 'コンパクトSUV', dims: [100, 63, 78] },
-      { name: 'ホンダ ヴェゼル', type: 'コンパクトSUV', dims: [105, 70, 78] },
-      { name: 'トヨタ RAV4', type: 'ミドルSUV', dims: [110, 90, 85] },
-      { name: '日産 エクストレイル', type: 'ミドルSUV', dims: [110, 88, 82] }
+    // cars-data.js（共通データ）から読み込み: [名前, 期間, cat, タイプ, サイズ, 定員, slide, slide詳細, 荷室, メモ]
+    const cars = window.CARS_RAW.map(r => ({
+      name: r[0], period: r[1], cat: r[2], type: r[3],
+      slide: r[6], dims: r[8],
+      current: r[1].includes('現行')
+    }));
+
+    const carCats = [
+      { key: 'all', label: 'すべて' },
+      { key: 'kei', label: '軽自動車' },
+      { key: 'compact', label: 'コンパクト' },
+      { key: 'minivan', label: 'ミニバン' },
+      { key: 'suv', label: 'SUV' },
+      { key: 'sedan', label: 'セダン・ワゴン' },
+      { key: 'sport', label: 'スポーツ' },
+      { key: 'neo', label: 'ネオクラシック' },
+      { key: 'import', label: '輸入車' }
     ];
 
     const presets = [
@@ -305,11 +332,39 @@
       return rots.some(([x,y,z]) => x <= W && y <= D && z <= H);
     }
 
+    let activeCat = 'all';
+    const $carCats = document.getElementById('carCats');
+    const $carSearch = document.getElementById('carSearch');
+
+    carCats.forEach(cc => {
+      const b = document.createElement('button');
+      b.className = 'preset' + (cc.key === 'all' ? ' active' : '');
+      b.textContent = cc.label;
+      b.dataset.key = cc.key;
+      b.addEventListener('click', () => {
+        activeCat = cc.key;
+        $carCats.querySelectorAll('.preset').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      });
+      $carCats.appendChild(b);
+    });
+
     function render() {
       const item = [Number($w.value)||0, Number($d.value)||0, Number($h.value)||0];
       if (item.some(v => v <= 0)) { $list.innerHTML = '<p>サイズを入力してください。</p>'; return; }
 
-      const judged = cars.map(c => {
+      const kw = $carSearch.value.trim().toLowerCase();
+      const onlyCur = document.getElementById('onlyCurrent').checked;
+      const onlySlide = document.getElementById('onlySlide').checked;
+      const targets = cars.filter(c =>
+        (activeCat === 'all' || c.cat === activeCat) &&
+        (!onlyCur || c.current) &&
+        (!onlySlide || c.slide !== 'none') &&
+        (!kw || (c.name + c.type + c.period).toLowerCase().includes(kw))
+      );
+
+      const judged = targets.map(c => {
         const easy = fits(item, c.dims, 5);   // 5cm以上のゆとりで入る
         const just = fits(item, c.dims, 0);   // ぴったりなら入る
         const status = easy ? 'fit' : just ? 'tight' : 'nofit';
@@ -320,26 +375,33 @@
       judged.sort((a, b) => order[a.status] - order[b.status]);
 
       const label = { fit: '✅ 積めそう', tight: '⚠️ ギリギリ', nofit: '❌ 難しそう' };
-      $list.innerHTML = judged.map(c => `
+      $list.innerHTML = judged.length ? judged.map(c => `
         <div class="car ${c.status}">
           <span class="badge">${label[c.status]}</span>
           <div>
             <div class="name">${c.name}</div>
-            <div class="type">${c.type}</div>
+            <div class="tagrow">
+              <span class="tag">${c.type}</span>
+              <span class="tag ${c.current ? 'now' : 'used'}">${c.period}</span>
+              ${c.slide === 'both' ? '<span class="tag slide">両側スライド</span>' : c.slide === 'one' ? '<span class="tag slide">片側スライド</span>' : ''}
+            </div>
           </div>
           <div class="dims-txt">荷室目安<br>${c.dims[0]}×${c.dims[1]}×${c.dims[2]}cm</div>
         </div>
-      `).join('');
+      `).join('') : '<p style="color:var(--muted)">該当する車種がありません。</p>';
 
       const fitCount = judged.filter(c => c.status === 'fit').length;
       const tightCount = judged.filter(c => c.status === 'tight').length;
-      $summary.textContent = `— ${cars.length}車種中 ✅${fitCount}台 ⚠️${tightCount}台`;
+      $summary.textContent = `— ${judged.length}車種中 ✅${fitCount}台 ⚠️${tightCount}台`;
     }
 
     [$w, $d, $h].forEach(el => el.addEventListener('input', () => {
-      document.querySelectorAll('.preset').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('#presets .preset').forEach(x => x.classList.remove('active'));
       render();
     }));
+    $carSearch.addEventListener('input', render);
+    document.getElementById('onlyCurrent').addEventListener('change', render);
+    document.getElementById('onlySlide').addEventListener('change', render);
 
     render();
   </script>
