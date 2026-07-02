@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>荷室フィットチェッカー｜カーコング</title>
-  <meta name="description" content="ベビーカーやスーツケースの寸法を入力すると、軽・コンパクト・ミニバン・SUVなど国内現行車種 約50モデルの荷室に積めそうか目安判定するツール。埼玉県八潮市の中古車販売店カーコング提供。" />
+  <meta name="description" content="ベビーカーやスーツケースの寸法を入力すると、現行＋過去10年の国内モデル約90車種の荷室に積めそうか目安判定するツール。埼玉県八潮市の中古車販売店カーコング提供。" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
   <style>
     :root {
@@ -118,6 +118,25 @@
     .cta a { color: var(--red); }
     .disclaimer { font-size: .72rem; color: var(--muted); margin-top: 1rem; text-align: center; }
 
+    /* ===== タグ・トグル ===== */
+    .tagrow { display: flex; gap: .35rem; flex-wrap: wrap; margin-top: .15rem; }
+    .tag {
+      font-size: .68rem;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: .02rem .45rem;
+      background: #eef4ef;
+      color: var(--green-dark);
+      border: 1px solid #d4e4d8;
+    }
+    .tag.slide { background: #e7f0fd; color: #1c4f9c; border-color: #c9dcf7; }
+    .tag.now { background: var(--yellow-soft); color: #8a6d00; border-color: #efdf9a; }
+    .tag.used { background: #f1f1f1; color: #666; border-color: #ddd; }
+    .toggles { display: flex; gap: 1.1rem; flex-wrap: wrap; margin-bottom: .7rem; font-size: .85rem; font-weight: 700; }
+    .toggles label { display: flex; align-items: center; gap: .35rem; cursor: pointer; color: var(--green-dark); }
+    .toggles input { accent-color: var(--green); width: 1.05rem; height: 1.05rem; }
+
+
     /* ===== site header / footer ===== */
     .site-header {
       position: sticky;
@@ -137,6 +156,7 @@
       margin: 0 auto;
     }
     .logo {
+      white-space: nowrap;
       font-size: 1.4rem;
       font-weight: 900;
       color: var(--green-dark);
@@ -196,6 +216,7 @@
       <nav class="global">
         <a href="index.html">ホーム</a>
         <a href="qa.html">Q&amp;A記事 100選</a>
+        <a href="zukan.html">自動車図鑑</a>
         <a href="cost-simulator.html">維持費シミュレーター</a>
         <a href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">在庫情報</a>
         <a href="index.html#access">店舗・アクセス</a>
@@ -206,7 +227,7 @@
 
   <div class="tool-head">
     <h1>🦍 荷室フィットチェッカー</h1>
-    <p>ベビーカー、積めるかな？ 国内現行 約50車種から積めそうな車をチェック！</p>
+    <p>ベビーカー、積めるかな？ 現行＋過去10年の約90車種から積めそうな車をチェック！</p>
   </div>
 
   <div class="wrap">
@@ -234,10 +255,14 @@
     <div class="panel">
       <h2>2. 判定結果 <span id="summary" style="font-size:.8rem; color:var(--muted); font-weight:700"></span></h2>
       <div class="presets" id="carCats" style="margin-bottom:.6rem;"></div>
+      <div class="toggles">
+        <label><input type="checkbox" id="onlyCurrent" /> 現行モデルのみ</label>
+        <label><input type="checkbox" id="onlySlide" /> スライドドア車のみ</label>
+      </div>
       <input id="carSearch" type="search" placeholder="車名で探す（例：N-BOX／シエンタ）"
         style="width:100%; border:2px solid var(--green); border-radius:999px; padding:.5rem 1rem; font-size:.95rem; margin-bottom:.9rem; background:#fff; color:var(--ink);" />
       <div class="car-list" id="carList"></div>
-      <p class="disclaimer">※荷室寸法は代表的なグレードの参考目安値です（年式・グレード・シート位置で変わります）。「後席使用時」の荷室を基準にしています。実際の積載可否は実車でご確認ください。ご来店時の「試し積み」大歓迎です！</p>
+      <p class="disclaimer">※荷室寸法は代表的なグレードの参考目安値です（年式・グレード・シート位置で変わります）。「後席使用時」の荷室を基準にしています。実際の積載可否は実車でご確認ください。ご来店時の「試し積み」大歓迎です！<br />🚗 各車種の詳しい情報（スライドドアのグレード展開・ボディサイズなど）は <a href="zukan.html" style="color:var(--red); font-weight:700;">自動車図鑑</a> をご覧ください。</p>
     </div>
 
     <div class="cta">
@@ -247,67 +272,14 @@
 
   </div>
 
+  <script src="cars-data.js"></script>
   <script>
-    // 荷室の参考目安値（cm）: [幅, 奥行(後席使用時), 高さ]  cat: 絞り込み用カテゴリ
-    const cars = [
-      // ---- 軽自動車 ----
-      { name: 'ホンダ N-BOX', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [110, 45, 112] },
-      { name: 'ダイハツ タント', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [109, 42, 110] },
-      { name: 'スズキ スペーシア', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [100, 44, 109] },
-      { name: '日産 ルークス', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [108, 43, 110] },
-      { name: '三菱 デリカミニ', type: '軽スーパーハイト・スライドドア', cat: 'kei', dims: [108, 44, 108] },
-      { name: 'ダイハツ ムーヴキャンバス', type: '軽ハイト・スライドドア', cat: 'kei', dims: [100, 36, 98] },
-      { name: 'スズキ ワゴンRスマイル', type: '軽ハイト・スライドドア', cat: 'kei', dims: [98, 38, 97] },
-      { name: 'ホンダ N-WGN', type: '軽ハイトワゴン', cat: 'kei', dims: [102, 48, 100] },
-      { name: 'ダイハツ ムーヴ', type: '軽ハイトワゴン', cat: 'kei', dims: [100, 40, 95] },
-      { name: 'スズキ ワゴンR', type: '軽ハイトワゴン', cat: 'kei', dims: [98, 40, 90] },
-      { name: 'スズキ ハスラー', type: '軽クロスオーバー', cat: 'kei', dims: [96, 38, 88] },
-      { name: 'ダイハツ タフト', type: '軽クロスオーバー', cat: 'kei', dims: [105, 45, 80] },
-      { name: 'ホンダ N-ONE', type: '軽セミトール', cat: 'kei', dims: [96, 35, 85] },
-      { name: 'スズキ アルト', type: '軽セダン', cat: 'kei', dims: [95, 35, 85] },
-      { name: 'ダイハツ ミライース', type: '軽セダン', cat: 'kei', dims: [95, 35, 85] },
-      { name: 'スズキ ジムニー', type: '軽クロカン', cat: 'kei', dims: [97, 24, 85] },
-      { name: 'ホンダ N-VAN', type: '軽バン', cat: 'kei', dims: [120, 110, 120] },
-      { name: 'スズキ エブリイワゴン', type: '軽ワンボックス・スライドドア', cat: 'kei', dims: [120, 95, 120] },
-      // ---- コンパクトカー ----
-      { name: 'トヨタ ヤリス', type: 'コンパクトカー', cat: 'compact', dims: [100, 60, 75] },
-      { name: 'トヨタ アクア', type: 'コンパクトカー', cat: 'compact', dims: [100, 60, 72] },
-      { name: 'ホンダ フィット', type: 'コンパクトカー', cat: 'compact', dims: [100, 65, 80] },
-      { name: '日産 ノート', type: 'コンパクトカー', cat: 'compact', dims: [100, 58, 80] },
-      { name: 'スズキ スイフト', type: 'コンパクトカー', cat: 'compact', dims: [100, 55, 75] },
-      { name: 'マツダ MAZDA2', type: 'コンパクトカー', cat: 'compact', dims: [100, 52, 73] },
-      { name: 'トヨタ ルーミー', type: 'コンパクトトール・スライドドア', cat: 'compact', dims: [100, 52, 110] },
-      { name: 'スズキ ソリオ', type: 'コンパクトトール・スライドドア', cat: 'compact', dims: [100, 54, 105] },
-      // ---- ミニバン ----
-      { name: 'トヨタ シエンタ', type: 'コンパクトミニバン・スライドドア', cat: 'minivan', dims: [120, 55, 105] },
-      { name: 'ホンダ フリード', type: 'コンパクトミニバン・スライドドア', cat: 'minivan', dims: [108, 50, 110] },
-      { name: 'トヨタ ノア／ヴォクシー', type: 'ミドルミニバン・スライドドア', cat: 'minivan', dims: [120, 60, 110] },
-      { name: '日産 セレナ', type: 'ミドルミニバン・スライドドア', cat: 'minivan', dims: [120, 55, 112] },
-      { name: 'ホンダ ステップワゴン', type: 'ミドルミニバン・スライドドア', cat: 'minivan', dims: [125, 60, 112] },
-      { name: '三菱 デリカD:5', type: 'ミニバン×SUV・スライドドア', cat: 'minivan', dims: [110, 50, 105] },
-      { name: 'トヨタ アルファード／ヴェルファイア', type: 'ラージミニバン・スライドドア', cat: 'minivan', dims: [115, 65, 105] },
-      // ---- SUV ----
-      { name: 'トヨタ ライズ', type: 'コンパクトSUV', cat: 'suv', dims: [100, 63, 78] },
-      { name: 'トヨタ ヤリスクロス', type: 'コンパクトSUV', cat: 'suv', dims: [100, 65, 78] },
-      { name: 'ホンダ ヴェゼル', type: 'コンパクトSUV', cat: 'suv', dims: [105, 70, 78] },
-      { name: 'トヨタ カローラクロス', type: 'コンパクトSUV', cat: 'suv', dims: [105, 72, 80] },
-      { name: '日産 キックス', type: 'コンパクトSUV', cat: 'suv', dims: [100, 62, 78] },
-      { name: 'スバル クロストレック', type: 'コンパクトSUV', cat: 'suv', dims: [105, 70, 75] },
-      { name: 'マツダ CX-30', type: 'コンパクトSUV', cat: 'suv', dims: [100, 60, 72] },
-      { name: 'スズキ ジムニーシエラ', type: 'コンパクトクロカン', cat: 'suv', dims: [100, 30, 85] },
-      { name: 'ホンダ ZR-V', type: 'ミドルSUV', cat: 'suv', dims: [105, 75, 78] },
-      { name: 'マツダ CX-5', type: 'ミドルSUV', cat: 'suv', dims: [105, 78, 79] },
-      { name: 'トヨタ ハリアー', type: 'ミドルSUV', cat: 'suv', dims: [105, 90, 78] },
-      { name: 'トヨタ RAV4', type: 'ミドルSUV', cat: 'suv', dims: [110, 90, 85] },
-      { name: '日産 エクストレイル', type: 'ミドルSUV', cat: 'suv', dims: [110, 88, 82] },
-      { name: 'スバル フォレスター', type: 'ミドルSUV', cat: 'suv', dims: [110, 85, 85] },
-      { name: 'トヨタ ランドクルーザー250', type: 'ラージSUV', cat: 'suv', dims: [110, 95, 95] },
-      // ---- セダン・ワゴン ----
-      { name: 'トヨタ プリウス', type: 'ハッチバック', cat: 'sedan', dims: [100, 75, 70] },
-      { name: 'トヨタ カローラツーリング', type: 'ステーションワゴン', cat: 'sedan', dims: [105, 85, 70] },
-      { name: 'スバル レヴォーグ', type: 'ステーションワゴン', cat: 'sedan', dims: [108, 90, 75] },
-      { name: 'トヨタ カローラ（セダン）', type: 'セダン（トランク）', cat: 'sedan', dims: [100, 95, 50] }
-    ];
+    // cars-data.js（共通データ）から読み込み: [名前, 期間, cat, タイプ, サイズ, 定員, slide, slide詳細, 荷室, メモ]
+    const cars = window.CARS_RAW.map(r => ({
+      name: r[0], period: r[1], cat: r[2], type: r[3],
+      slide: r[6], dims: r[8],
+      current: r[1].includes('現行')
+    }));
 
     const carCats = [
       { key: 'all', label: 'すべて' },
@@ -379,9 +351,13 @@
       if (item.some(v => v <= 0)) { $list.innerHTML = '<p>サイズを入力してください。</p>'; return; }
 
       const kw = $carSearch.value.trim().toLowerCase();
+      const onlyCur = document.getElementById('onlyCurrent').checked;
+      const onlySlide = document.getElementById('onlySlide').checked;
       const targets = cars.filter(c =>
         (activeCat === 'all' || c.cat === activeCat) &&
-        (!kw || (c.name + c.type).toLowerCase().includes(kw))
+        (!onlyCur || c.current) &&
+        (!onlySlide || c.slide !== 'none') &&
+        (!kw || (c.name + c.type + c.period).toLowerCase().includes(kw))
       );
 
       const judged = targets.map(c => {
@@ -400,7 +376,11 @@
           <span class="badge">${label[c.status]}</span>
           <div>
             <div class="name">${c.name}</div>
-            <div class="type">${c.type}</div>
+            <div class="tagrow">
+              <span class="tag">${c.type}</span>
+              <span class="tag ${c.current ? 'now' : 'used'}">${c.period}</span>
+              ${c.slide === 'both' ? '<span class="tag slide">両側スライド</span>' : c.slide === 'one' ? '<span class="tag slide">片側スライド</span>' : ''}
+            </div>
           </div>
           <div class="dims-txt">荷室目安<br>${c.dims[0]}×${c.dims[1]}×${c.dims[2]}cm</div>
         </div>
@@ -416,6 +396,8 @@
       render();
     }));
     $carSearch.addEventListener('input', render);
+    document.getElementById('onlyCurrent').addEventListener('change', render);
+    document.getElementById('onlySlide').addEventListener('change', render);
 
     render();
   </script>
