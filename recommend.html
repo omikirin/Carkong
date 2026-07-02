@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>あなたのオススメの一台は？かんたん診断｜カーコング</title>
-  <meta name="description" content="子どもの人数・年式のこだわり・重視ポイントを選ぶだけで、約150車種からあなたにピッタリの一台をゴリラ店長が診断！埼玉県八潮市の中古車販売店カーコング提供。" />
+  <meta name="description" content="子どもの人数・年式のこだわり・重視ポイントを選ぶだけで、約180車種からあなたにピッタリの一台をゴリラ店長が診断！埼玉県八潮市の中古車販売店カーコング提供。" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
   <style>
     :root {
@@ -212,7 +212,7 @@
 
   <div class="tool-head">
     <h1>🦍 あなたのオススメの一台は？</h1>
-    <p>3つ選ぶだけ・約10秒。約150車種からゴリラ店長がピッタリの一台を診断します！</p>
+    <p>3つ選ぶだけ・約10秒。約180車種からゴリラ店長がピッタリの一台を診断します！</p>
   </div>
 
   <div class="wrap">
@@ -354,8 +354,8 @@
           if (/[78]人/.test(c.seats)) { score += 8; reasons.push('3列シートで家族全員＋荷物もOK'); }
           else score -= 4;
         }
-        if (kids === 0 && (c.cat === 'suv' || c.cat === 'sedan' || c.cat === 'compact' || c.cat === 'sport')) score += 2;
-        if (kids >= 2 && c.cat === 'sport') score -= 6;
+        if (kids === 0 && ['suv','sedan','compact','sport','neo','import'].includes(c.cat)) score += 2;
+        if (kids >= 2 && (c.cat === 'sport' || c.cat === 'neo')) score -= 6;
 
         // 年式・コスパ
         if (age === 'any' && !c.current) { score += 3; reasons.push('年数が経ったぶん中古価格がお手頃'); }
