@@ -5,6 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>カーコング｜埼玉県八潮市の中古車販売・買取・車検・整備</title>
   <meta name="description" content="埼玉県八潮市の中古車販売店カーコング（有限会社ティーエヌオートクラブ）。自信を持っておすすめできる特選車のみを厳選。販売・買取・車検・修理・カスタマイズまでワンストップでお任せください。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="カーコング｜埼玉県八潮市の中古車販売・買取・車検・整備" />
+  <meta property="og:description" content="自信を持っておすすめできる特選車のみを厳選。レビュー総合5.0。販売・買取・車検・修理・カスタマイズまでワンストップ。つくばエクスプレス八潮駅まで送迎いたします。" />
+  <meta property="og:image" content="images/hero.jpg" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "カーコング",
+    "legalName": "有限会社ティーエヌオートクラブ",
+    "description": "埼玉県八潮市の中古車販売店。特選車のみを厳選し、販売・買取・車検・修理・カスタマイズまでワンストップで対応。",
+    "address": {
+      "@type": "PostalAddress",
+      "postalCode": "340-0814",
+      "addressRegion": "埼玉県",
+      "addressLocality": "八潮市",
+      "streetAddress": "南川崎810-3",
+      "addressCountry": "JP"
+    },
+    "telephone": "0078-6044-8121",
+    "faxNumber": "048-999-8071",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "10:30",
+      "closes": "19:00"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "16"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "電車で行きたいのですが、最寄駅はどこですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "つくばエクスプレス「八潮駅」が最寄りです。ご来店の際は八潮駅までお迎えにあがりますので、お気軽にお電話ください。" }
+      },
+      {
+        "@type": "Question",
+        "name": "購入以外の相談（車検・修理だけ）でも大丈夫ですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "はい、大丈夫です。お車の買取・販売・車検・修理など、お車に関わることは何でも承っております。" }
+      },
+      {
+        "@type": "Question",
+        "name": "車のカスタマイズはお願いできますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "はい、承っております。ご希望のイメージをお聞かせください。" }
+      },
+      {
+        "@type": "Question",
+        "name": "定休日はいつですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "水曜日が定休日です（※他曜日臨時休業の場合も有ります）。営業時間は10:30〜19:00です。" }
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --yellow: #ffd900;
@@ -84,6 +149,48 @@
       text-decoration: none;
     }
     .header-tel small { color: var(--muted); font-size: .72rem; }
+
+    /* hamburger (mobile) */
+    .menu-toggle { display: none; }
+    .menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--green);
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .menu-btn span {
+      width: 20px;
+      height: 3px;
+      background: var(--green-dark);
+      border-radius: 2px;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .menu-toggle:checked ~ .header-inner .menu-btn span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle:checked ~ .header-inner .menu-btn span:nth-child(2) { opacity: 0; }
+    .menu-toggle:checked ~ .header-inner .menu-btn span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .mobile-nav { display: none; }
+    .menu-toggle:checked ~ .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-top: 1px solid var(--line);
+    }
+    .mobile-nav a {
+      text-decoration: none;
+      font-weight: 700;
+      padding: .85rem 1.4rem;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .mobile-nav a::before { content: "🦍 "; }
 
     /* ===== hero ===== */
     .hero {
@@ -329,15 +436,153 @@
     }
     footer .foot-logo { font-weight: 900; color: #fff; font-size: 1.1rem; margin-bottom: .3rem; }
 
+    /* ===== flow ===== */
+    .flow { counter-reset: step; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+    .flow-step {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.3rem 1.1rem 1.2rem;
+      position: relative;
+      box-shadow: 0 6px 18px rgba(60,50,0,.06);
+      text-align: center;
+    }
+    .flow-step::before {
+      counter-increment: step;
+      content: "STEP " counter(step);
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-weight: 800;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      border-radius: 999px;
+      padding: .15rem .9rem;
+      margin-bottom: .6rem;
+    }
+    .flow-step .f-icon { font-size: 2rem; line-height: 1; margin-bottom: .4rem; }
+    .flow-step h3 { margin: 0 0 .4rem; font-size: 1.02rem; color: var(--green-dark); }
+    .flow-step p { margin: 0; font-size: .85rem; color: var(--muted); }
+
+    /* ===== faq ===== */
+    .faq-list { max-width: 780px; margin: 0 auto; display: grid; gap: .8rem; }
+    .faq-list details {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 14px rgba(60,50,0,.05);
+    }
+    .faq-list summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--green-dark);
+      list-style: none;
+      display: flex;
+      align-items: baseline;
+      gap: .6rem;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::before {
+      content: "Q";
+      color: #fff;
+      background: var(--green);
+      border-radius: 8px;
+      font-size: .85rem;
+      padding: .05rem .55rem;
+      flex-shrink: 0;
+    }
+    .faq-list details[open] summary { margin-bottom: .6rem; }
+    .faq-a {
+      margin: 0;
+      color: var(--ink);
+      font-size: .93rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+    .faq-a::before {
+      content: "A";
+      position: absolute;
+      left: 0;
+      color: #fff;
+      background: var(--red);
+      border-radius: 8px;
+      font-size: .85rem;
+      padding: .05rem .55rem;
+    }
+
+    /* ===== scroll reveal ===== */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ===== back to top ===== */
+    .to-top {
+      position: fixed;
+      right: 1rem;
+      bottom: 5.2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 1.3rem;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      box-shadow: 0 6px 16px rgba(0,0,0,.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+      z-index: 40;
+    }
+    .to-top.show { opacity: 1; pointer-events: auto; }
+
+    /* ===== mobile bottom cta bar ===== */
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 45;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.18);
+    }
+    .mobile-cta a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: .95rem;
+      padding: .95rem .5rem;
+      color: #fff;
+    }
+    .mobile-cta .m-tel { background: var(--red); }
+    .mobile-cta .m-stock { background: var(--green); }
+
     @media (max-width: 720px) {
       nav.global { display: none; }
       .header-tel small { display: none; }
+      .header-tel a { font-size: 1.05rem; }
+      .menu-btn { display: flex; }
+      .mobile-cta { display: flex; }
+      body { padding-bottom: 3.4rem; }
+      .to-top { bottom: 4.6rem; }
+    }
+
+    @media (max-width: 460px) {
+      .logo { font-size: 1.15rem; }
+      .header-inner { gap: .5rem; }
+      .header-tel a { font-size: .95rem; }
     }
   </style>
 </head>
 <body>
 
   <header class="site-header">
+    <input type="checkbox" id="menu" class="menu-toggle" aria-hidden="true" />
     <div class="wrap header-inner">
       <a class="logo" href="#top"><span class="mark">🦍</span>カーコング</a>
       <nav class="global">
@@ -346,18 +591,36 @@
         <a href="#reason">選ばれる理由</a>
         <a href="#voice">クチコミ</a>
         <a href="#stock">在庫情報</a>
+        <a href="#flow">ご購入の流れ</a>
+        <a href="#faq">よくある質問</a>
         <a href="#access">店舗・アクセス</a>
       </nav>
       <div class="header-tel">
         <a href="tel:0078-6044-8121">0078-6044-8121</a><br />
         <small>営業時間 10:30〜19:00</small>
       </div>
+      <label class="menu-btn" for="menu" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </label>
     </div>
+    <nav class="mobile-nav">
+      <a href="#about">カーコングとは</a>
+      <a href="#service">サービス</a>
+      <a href="#reason">選ばれる理由</a>
+      <a href="#voice">クチコミ</a>
+      <a href="#stock">在庫情報</a>
+      <a href="#flow">ご購入の流れ</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#access">店舗・アクセス</a>
+    </nav>
   </header>
 
   <section class="hero" id="top">
     <div class="wrap">
-      <img class="hero-banner" src="hero.png" alt="お金で損しない！賢い選択をして、未来を守ろう！カーコング" />
+      <picture>
+        <source srcset="images/hero.webp" type="image/webp" />
+        <img class="hero-banner" src="images/hero.jpg" width="1717" height="916" alt="お金で損しない！賢い選択をして、未来を守ろう！カーコング" />
+      </picture>
       <div class="hero-copy">
         <span class="tagline">埼玉県八潮市の中古車販売店</span>
         <h1>お金で損しない、<br class="sp" />賢いクルマ選びを。</h1>
@@ -386,7 +649,7 @@
         <span class="en">About</span>
         <h2>カーコングとは</h2>
       </div>
-      <p class="about-lead">
+      <p class="about-lead reveal">
         カーコング（運営：有限会社ティーエヌオートクラブ）は、埼玉県八潮市の中古車販売店です。<br />
         お客様に<strong>自信を持ってオススメしたい特選車のみ</strong>を取り揃えて、ご来店をお待ちしております。
         お車のカスタマイズも承っております。<br />
@@ -401,7 +664,7 @@
         <span class="en">Service</span>
         <h2>サービス内容</h2>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-3 reveal">
         <article class="card">
           <div class="icon">🚗</div>
           <h3>中古車販売</h3>
@@ -442,7 +705,7 @@
         <span class="en">Reason</span>
         <h2>カーコングが選ばれる3つの理由</h2>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-3 reveal">
         <article class="card reason-card">
           <div class="num">01</div>
           <h3>「特選車」しか置かない</h3>
@@ -468,7 +731,7 @@
         <span class="en">Voice</span>
         <h2>お客様のクチコミ</h2>
       </div>
-      <div class="review-score">
+      <div class="review-score reveal">
         <div class="score-big">
           <div class="num">5.0</div>
           <div class="stars">★★★★★</div>
@@ -493,10 +756,81 @@
         <span class="en">Stock</span>
         <h2>在庫情報</h2>
       </div>
-      <div class="stock-box">
+      <div class="stock-box reveal">
         <h3>最新の在庫はグーネットでチェック！</h3>
         <p>厳選した特選車を随時掲載中。気になるお車はお電話でもすぐにご案内できます。</p>
         <a class="btn btn-green" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">グーネットで在庫を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="flow">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Flow</span>
+        <h2>ご購入の流れ</h2>
+      </div>
+      <div class="flow reveal">
+        <article class="flow-step">
+          <div class="f-icon">📞</div>
+          <h3>お問い合わせ</h3>
+          <p>お電話でお気軽にご相談ください。気になる在庫のご質問だけでも大歓迎です。</p>
+        </article>
+        <article class="flow-step">
+          <div class="f-icon">🚉</div>
+          <h3>ご来店</h3>
+          <p>つくばエクスプレス「八潮駅」までお迎えにあがります。お車でのご来店もOK。</p>
+        </article>
+        <article class="flow-step">
+          <div class="f-icon">🔍</div>
+          <h3>車両確認・ご相談</h3>
+          <p>実車をじっくりご確認ください。状態や装備について丁寧にご説明します。</p>
+        </article>
+        <article class="flow-step">
+          <div class="f-icon">📝</div>
+          <h3>お見積り・ご契約</h3>
+          <p>諸費用まで含めた支払総額をご提示。ご納得いただいてからご契約ください。</p>
+        </article>
+        <article class="flow-step">
+          <div class="f-icon">🔑</div>
+          <h3>ご納車</h3>
+          <p>納車後も車検・修理・カスタマイズまで、カーライフをしっかりサポートします。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>電車で行きたいのですが、最寄駅はどこですか？</summary>
+          <p class="faq-a">つくばエクスプレス「八潮駅」が最寄りです。ご来店の際は八潮駅までお迎えにあがりますので、お気軽にお電話ください。</p>
+        </details>
+        <details>
+          <summary>車で行く場合のアクセスを教えてください。</summary>
+          <p class="faq-a">首都高速6号三郷線「八潮」IC、または東京外環自動車道「三郷南」ICが便利です。住所は埼玉県八潮市南川崎810-3です。</p>
+        </details>
+        <details>
+          <summary>購入以外の相談（車検・修理だけ）でも大丈夫ですか？</summary>
+          <p class="faq-a">はい、大丈夫です。お車の買取・販売・車検・修理など、お車に関わることは何でも承っております。</p>
+        </details>
+        <details>
+          <summary>車のカスタマイズはお願いできますか？</summary>
+          <p class="faq-a">はい、承っております。「自分だけの一台」に仕上げたい方は、ご希望のイメージをお聞かせください。</p>
+        </details>
+        <details>
+          <summary>今乗っている車の買取だけでもお願いできますか？</summary>
+          <p class="faq-a">もちろん可能です。お乗り換えの下取りだけでなく、買取のみのご相談も歓迎です。まずはお気軽にお問い合わせください。</p>
+        </details>
+        <details>
+          <summary>定休日はいつですか？</summary>
+          <p class="faq-a">水曜日が定休日です（※他曜日臨時休業の場合も有ります）。営業時間は10:30〜19:00です。ご来店前にお電話いただけると確実です。</p>
+        </details>
       </div>
     </div>
   </section>
@@ -507,7 +841,7 @@
         <span class="en">Access</span>
         <h2>店舗情報・アクセス</h2>
       </div>
-      <div class="grid grid-2">
+      <div class="grid grid-2 reveal">
         <div>
           <table class="info-table">
             <tr><th>店舗名</th><td>カーコング</td></tr>
@@ -555,6 +889,35 @@
       <div>&copy; CarKong / T.N Auto Club Co., Ltd.</div>
     </div>
   </footer>
+
+  <a class="to-top" href="#top" aria-label="ページ上部へ戻る">↑</a>
+
+  <div class="mobile-cta">
+    <a class="m-tel" href="tel:0078-6044-8121">📞 電話で相談（通話無料）</a>
+    <a class="m-stock" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">🚗 在庫を見る</a>
+  </div>
+
+  <script>
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    const toTop = document.querySelector('.to-top');
+    addEventListener('scroll', () => {
+      toTop.classList.toggle('show', scrollY > 600);
+    }, { passive: true });
+
+    const menuToggle = document.getElementById('menu');
+    document.querySelectorAll('.mobile-nav a').forEach(a => {
+      a.addEventListener('click', () => { menuToggle.checked = false; });
+    });
+  </script>
 
 </body>
 </html>
