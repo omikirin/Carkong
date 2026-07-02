@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>クルマの維持費かんたんシミュレーター｜カーコング</title>
+  <meta name="description" content="年間走行距離とガソリン価格を入れるだけで、軽自動車・コンパクトカー・ミニバン・SUVの維持費（月額目安）を比較できる無料シミュレーター。埼玉県八潮市の中古車販売店カーコング提供。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
+  <style>
+    :root {
+      --yellow: #ffd900;
+      --yellow-soft: #fff7cc;
+      --green: #1c7a3f;
+      --green-dark: #0f5229;
+      --red: #d7263d;
+      --ink: #21231f;
+      --paper: #fffdf5;
+      --muted: #5d6158;
+      --line: #e8e2c8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.7;
+    }
+    .wrap { width: min(860px, 94%); margin: 0 auto; padding: 1.2rem 0 2rem; }
+
+    .tool-head {
+      background: linear-gradient(135deg, #ffe345, var(--yellow));
+      border-bottom: 5px solid var(--green);
+      text-align: center;
+      padding: 1.3rem 1rem 1.1rem;
+    }
+    .tool-head h1 { margin: 0; font-size: clamp(1.2rem, 3.5vw, 1.7rem); color: var(--green-dark); }
+    .tool-head p { margin: .2rem 0 0; font-size: .85rem; font-weight: 700; color: #4a3f00; }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.2rem 1.2rem 1.4rem;
+      box-shadow: 0 6px 18px rgba(60,50,0,.07);
+      margin-bottom: 1.2rem;
+    }
+    .panel h2 { margin: 0 0 .8rem; font-size: 1.05rem; color: var(--green-dark); }
+
+    .inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .9rem; }
+    .field label { display: block; font-size: .8rem; font-weight: 700; color: var(--muted); margin-bottom: .25rem; }
+    .field .val { font-weight: 900; color: var(--green-dark); }
+    .field input[type="range"] { width: 100%; accent-color: var(--green); }
+    .field input[type="number"] {
+      width: 100%;
+      border: 2px solid var(--green);
+      border-radius: 10px;
+      padding: .5rem .7rem;
+      font-size: 1rem;
+      font-weight: 800;
+      text-align: center;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .table-scroll { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .88rem; }
+    th, td { padding: .55rem .7rem; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th {
+      background: var(--yellow-soft);
+      color: var(--green-dark);
+      font-size: .85rem;
+    }
+    thead th small { display: block; font-weight: 400; color: var(--muted); font-size: .7rem; }
+    tbody tr:last-child td { border-bottom: none; }
+    tr.total td {
+      font-weight: 900;
+      font-size: 1.02rem;
+      color: var(--green-dark);
+      border-top: 3px solid var(--yellow);
+      background: #fffcf0;
+    }
+    td.best { color: var(--red); position: relative; }
+    td.best::after { content: " 👑"; }
+    .row-label { color: var(--muted); }
+
+    .hint { font-size: .78rem; color: var(--muted); margin-top: .7rem; }
+
+    .cta {
+      text-align: center;
+      background: var(--yellow-soft);
+      border: 2px dashed var(--green);
+      border-radius: 14px;
+      padding: 1rem;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+    .cta a { color: var(--red); }
+  </style>
+</head>
+<body>
+
+  <div class="tool-head">
+    <h1>🦍 維持費かんたんシミュレーター</h1>
+    <p>「お金で損しない」車選びは、維持費を知ることから。使い方に合わせて月いくらか比べてみよう！</p>
+  </div>
+
+  <div class="wrap">
+
+    <div class="panel">
+      <h2>1. あなたの使い方を入力</h2>
+      <div class="inputs">
+        <div class="field">
+          <label for="km">年間走行距離：<span class="val" id="kmVal">8,000</span> km</label>
+          <input id="km" type="range" min="1000" max="30000" step="1000" value="8000" />
+        </div>
+        <div class="field">
+          <label for="fuel">ガソリン価格（円/L）</label>
+          <input id="fuel" type="number" min="100" max="300" value="175" inputmode="numeric" />
+        </div>
+        <div class="field">
+          <label for="park">駐車場代（円/月）</label>
+          <input id="park" type="number" min="0" max="100000" step="500" value="0" inputmode="numeric" />
+        </div>
+        <div class="field">
+          <label for="ins">任意保険（円/年）</label>
+          <input id="ins" type="number" min="0" max="300000" step="1000" value="60000" inputmode="numeric" />
+        </div>
+      </div>
+      <p class="hint">💡 駐車場が自宅にある方は0円のままでOK。任意保険は補償内容・等級で大きく変わります（6万円/年は一例です）。</p>
+    </div>
+
+    <div class="panel">
+      <h2>2. タイプ別の維持費比較 <span id="note" style="font-size:.78rem; color:var(--muted); font-weight:700"></span></h2>
+      <div class="table-scroll">
+        <table id="resultTable"></table>
+      </div>
+      <p class="hint">
+        ※燃費・税額・車検/消耗品の積立額は代表的な目安値です（車種・年式・使い方で変わります）。自動車税は自家用乗用の目安、車検積立には法定費用（重量税・自賠責）と基本整備料の目安を含みます。ローン返済・タイヤ買い替えの当たり年などは含みません。
+      </p>
+    </div>
+
+    <div class="cta">
+      「この車種なら実際いくら？」はプロに聞くのが早い！<br />
+      <a href="tel:0078-6044-8121">📞 0078-6044-8121（通話無料）</a> ｜ カーコング（埼玉県八潮市）
+    </div>
+
+  </div>
+
+  <script>
+    // タイプ別の目安値
+    const types = [
+      { name: '軽自動車',      example: 'N-BOX・タント など',        nempi: 19, tax: 10800,  shaken: 45000, wear: 15000 },
+      { name: 'コンパクトカー', example: 'ヤリス・フィット など',      nempi: 18, tax: 30500,  shaken: 55000, wear: 20000 },
+      { name: 'コンパクトミニバン', example: 'シエンタ・フリード など', nempi: 15, tax: 36000,  shaken: 60000, wear: 25000 },
+      { name: 'ミドルミニバン', example: 'ノア・セレナ など',          nempi: 12, tax: 36000,  shaken: 65000, wear: 30000 },
+      { name: 'SUV',           example: 'ライズ・ヴェゼル など',      nempi: 15, tax: 36000,  shaken: 62000, wear: 28000 }
+    ];
+    // shaken: 車検2年分の法定費用+基本整備の目安 → 年割りは /2
+
+    const $km = document.getElementById('km');
+    const $kmVal = document.getElementById('kmVal');
+    const $fuel = document.getElementById('fuel');
+    const $park = document.getElementById('park');
+    const $ins = document.getElementById('ins');
+    const $table = document.getElementById('resultTable');
+
+    const yen = n => Math.round(n).toLocaleString('ja-JP');
+
+    function render() {
+      const km = Number($km.value);
+      const fuel = Number($fuel.value) || 0;
+      const park = Number($park.value) || 0;
+      const ins = Number($ins.value) || 0;
+      $kmVal.textContent = km.toLocaleString('ja-JP');
+
+      const rows = types.map(t => {
+        const fuelYear = km / t.nempi * fuel;
+        const shakenYear = t.shaken / 2;
+        const parkYear = park * 12;
+        const totalYear = fuelYear + t.tax + shakenYear + t.wear + ins + parkYear;
+        return { ...t, fuelYear, shakenYear, totalYear, monthly: totalYear / 12 };
+      });
+
+      const minMonthly = Math.min(...rows.map(r => r.monthly));
+
+      const head = `
+        <thead>
+          <tr>
+            <th>項目（年額）</th>
+            ${rows.map(r => `<th>${r.name}<small>${r.example}</small></th>`).join('')}
+          </tr>
+        </thead>`;
+
+      const line = (label, fn, cls) => `
+        <tr class="${cls || ''}">
+          <td class="row-label">${label}</td>
+          ${rows.map(r => `<td>${fn(r)}</td>`).join('')}
+        </tr>`;
+
+      const body = `
+        <tbody>
+          ${line('燃料代', r => yen(r.fuelYear) + '円')}
+          ${line('自動車税（種別割）', r => yen(r.tax) + '円')}
+          ${line('車検積立（法定費用込）', r => yen(r.shakenYear) + '円')}
+          ${line('消耗品積立', r => yen(r.wear) + '円')}
+          ${line('任意保険', () => yen(ins) + '円')}
+          ${line('駐車場', () => yen(park * 12) + '円')}
+          <tr class="total">
+            <td>月あたり</td>
+            ${rows.map(r => `<td class="${r.monthly === minMonthly ? 'best' : ''}">約${yen(r.monthly)}円</td>`).join('')}
+          </tr>
+          ${line('年間合計', r => '約' + yen(r.totalYear) + '円', 'total')}
+        </tbody>`;
+
+      $table.innerHTML = head + body;
+      document.getElementById('note').textContent = `— 年${km.toLocaleString('ja-JP')}km・ガソリン${fuel}円/Lで計算`;
+    }
+
+    [$km, $fuel, $park, $ins].forEach(el => el.addEventListener('input', render));
+    render();
+  </script>
+
+</body>
+</html>
