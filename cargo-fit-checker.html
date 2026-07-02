@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>荷室フィットチェッカー｜カーコング</title>
+  <meta name="description" content="ベビーカーやスーツケースの寸法を入力すると、人気ファミリーカーの荷室に積めそうか目安判定するツール。埼玉県八潮市の中古車販売店カーコング提供。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
+  <style>
+    :root {
+      --yellow: #ffd900;
+      --yellow-soft: #fff7cc;
+      --green: #1c7a3f;
+      --green-dark: #0f5229;
+      --red: #d7263d;
+      --ink: #21231f;
+      --paper: #fffdf5;
+      --muted: #5d6158;
+      --line: #e8e2c8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.7;
+    }
+    .wrap { width: min(820px, 94%); margin: 0 auto; padding: 1.2rem 0 2rem; }
+
+    .tool-head {
+      background: linear-gradient(135deg, #ffe345, var(--yellow));
+      border-bottom: 5px solid var(--green);
+      text-align: center;
+      padding: 1.3rem 1rem 1.1rem;
+    }
+    .tool-head h1 { margin: 0; font-size: clamp(1.2rem, 3.5vw, 1.7rem); color: var(--green-dark); }
+    .tool-head p { margin: .2rem 0 0; font-size: .85rem; font-weight: 700; color: #4a3f00; }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.2rem 1.2rem 1.4rem;
+      box-shadow: 0 6px 18px rgba(60,50,0,.07);
+      margin-bottom: 1.2rem;
+    }
+    .panel h2 { margin: 0 0 .7rem; font-size: 1.05rem; color: var(--green-dark); }
+
+    .presets { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1rem; }
+    .preset {
+      border: 1.5px solid var(--green);
+      background: #fff;
+      color: var(--green-dark);
+      border-radius: 999px;
+      padding: .3rem .8rem;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .preset:hover, .preset.active { background: var(--green); color: #fff; }
+
+    .dims { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+    .dim label { display: block; font-size: .8rem; font-weight: 700; color: var(--muted); margin-bottom: .2rem; }
+    .dim input {
+      width: 100%;
+      border: 2px solid var(--green);
+      border-radius: 10px;
+      padding: .55rem .7rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-align: center;
+      color: var(--ink);
+      background: #fff;
+    }
+    .dim input:focus { outline: 3px solid var(--yellow); }
+
+    .result-note { font-size: .78rem; color: var(--muted); margin: .6rem 0 0; }
+
+    .car-list { display: grid; gap: .55rem; }
+    .car {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: .65rem .9rem;
+    }
+    .car .badge {
+      flex-shrink: 0;
+      width: 86px;
+      text-align: center;
+      font-weight: 900;
+      font-size: .82rem;
+      border-radius: 999px;
+      padding: .28rem 0;
+    }
+    .car.fit { border-left: 6px solid #2e9e56; }
+    .car.fit .badge { background: #e2f6e9; color: #17703a; }
+    .car.tight { border-left: 6px solid #e8a500; }
+    .car.tight .badge { background: #fdf3d3; color: #9a6d00; }
+    .car.nofit { border-left: 6px solid #c9c9c9; opacity: .72; }
+    .car.nofit .badge { background: #eee; color: #777; }
+    .car .name { font-weight: 800; font-size: .95rem; }
+    .car .type { font-size: .72rem; color: var(--muted); }
+    .car .dims-txt { margin-left: auto; text-align: right; font-size: .72rem; color: var(--muted); white-space: nowrap; }
+
+    .cta {
+      text-align: center;
+      background: var(--yellow-soft);
+      border: 2px dashed var(--green);
+      border-radius: 14px;
+      padding: 1rem;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+    .cta a { color: var(--red); }
+    .disclaimer { font-size: .72rem; color: var(--muted); margin-top: 1rem; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div class="tool-head">
+    <h1>🦍 荷室フィットチェッカー</h1>
+    <p>ベビーカー、積めるかな？ 荷物のサイズから積めそうな車をチェック！</p>
+  </div>
+
+  <div class="wrap">
+
+    <div class="panel">
+      <h2>1. 荷物を選ぶ（またはサイズを入力）</h2>
+      <div class="presets" id="presets"></div>
+      <div class="dims">
+        <div class="dim">
+          <label for="w">幅（cm）</label>
+          <input id="w" type="number" min="1" max="300" value="52" inputmode="numeric" />
+        </div>
+        <div class="dim">
+          <label for="d">奥行（cm）</label>
+          <input id="d" type="number" min="1" max="300" value="38" inputmode="numeric" />
+        </div>
+        <div class="dim">
+          <label for="h">高さ（cm）</label>
+          <input id="h" type="number" min="1" max="300" value="90" inputmode="numeric" />
+        </div>
+      </div>
+      <p class="result-note">💡 折りたたんだ状態のサイズを入れてください。向きを変えて積む置き方も自動で考慮します。</p>
+    </div>
+
+    <div class="panel">
+      <h2>2. 判定結果 <span id="summary" style="font-size:.8rem; color:var(--muted); font-weight:700"></span></h2>
+      <div class="car-list" id="carList"></div>
+      <p class="disclaimer">※荷室寸法は代表的なグレードの参考目安値です（年式・グレード・シート位置で変わります）。「後席使用時」の荷室を基準にしています。実際の積載可否は実車でご確認ください。ご来店時の「試し積み」大歓迎です！</p>
+    </div>
+
+    <div class="cta">
+      実車で確かめるのが一番確実！ <a href="tel:0078-6044-8121">📞 0078-6044-8121（通話無料）</a><br />
+      カーコング（埼玉県八潮市）はベビーカー持参の「試し積み」歓迎です🦍
+    </div>
+
+  </div>
+
+  <script>
+    // 荷室の参考目安値（cm）: [幅, 奥行(後席使用時), 高さ]
+    const cars = [
+      { name: 'ホンダ N-BOX', type: '軽スーパーハイト', dims: [110, 45, 112] },
+      { name: 'ダイハツ タント', type: '軽スーパーハイト', dims: [109, 42, 110] },
+      { name: 'スズキ スペーシア', type: '軽スーパーハイト', dims: [100, 44, 109] },
+      { name: 'スズキ ワゴンR', type: '軽ハイトワゴン', dims: [98, 40, 90] },
+      { name: 'トヨタ ルーミー', type: 'コンパクトトール', dims: [100, 52, 110] },
+      { name: 'トヨタ シエンタ', type: 'コンパクトミニバン', dims: [120, 55, 105] },
+      { name: 'ホンダ フリード', type: 'コンパクトミニバン', dims: [108, 50, 110] },
+      { name: 'トヨタ ヤリス', type: 'コンパクトカー', dims: [100, 60, 75] },
+      { name: 'ホンダ フィット', type: 'コンパクトカー', dims: [100, 65, 80] },
+      { name: 'トヨタ カローラツーリング', type: 'ステーションワゴン', dims: [105, 85, 70] },
+      { name: 'トヨタ ノア／ヴォクシー', type: 'ミドルミニバン', dims: [120, 60, 110] },
+      { name: '日産 セレナ', type: 'ミドルミニバン', dims: [120, 55, 112] },
+      { name: 'ホンダ ステップワゴン', type: 'ミドルミニバン', dims: [125, 60, 112] },
+      { name: 'トヨタ アルファード', type: 'ラージミニバン', dims: [115, 65, 105] },
+      { name: 'トヨタ ライズ', type: 'コンパクトSUV', dims: [100, 63, 78] },
+      { name: 'ホンダ ヴェゼル', type: 'コンパクトSUV', dims: [105, 70, 78] },
+      { name: 'トヨタ RAV4', type: 'ミドルSUV', dims: [110, 90, 85] },
+      { name: '日産 エクストレイル', type: 'ミドルSUV', dims: [110, 88, 82] }
+    ];
+
+    const presets = [
+      { label: '🍼 A型ベビーカー', dims: [52, 38, 90] },
+      { label: '🍼 B型ベビーカー', dims: [45, 31, 92] },
+      { label: '👶 双子用ベビーカー', dims: [80, 40, 95] },
+      { label: '🧳 スーツケースL', dims: [50, 30, 75] },
+      { label: '🏕️ クーラーボックス50L', dims: [65, 35, 40] },
+      { label: '🚲 子ども自転車16型', dims: [115, 45, 70] },
+      { label: '⛺ テント(収納時)', dims: [70, 25, 25] }
+    ];
+
+    const $w = document.getElementById('w');
+    const $d = document.getElementById('d');
+    const $h = document.getElementById('h');
+    const $list = document.getElementById('carList');
+    const $summary = document.getElementById('summary');
+    const $presets = document.getElementById('presets');
+
+    presets.forEach(p => {
+      const b = document.createElement('button');
+      b.className = 'preset';
+      b.textContent = p.label;
+      b.addEventListener('click', () => {
+        [$w.value, $d.value, $h.value] = p.dims;
+        document.querySelectorAll('.preset').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      });
+      $presets.appendChild(b);
+    });
+
+    // 6通りの向きを試して収まるか判定。margin(cm)のゆとり付き判定用
+    function fits(item, cargo, margin) {
+      const [W, D, H] = cargo.map(v => v - margin);
+      const [a, b, c] = item;
+      const rots = [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]];
+      return rots.some(([x,y,z]) => x <= W && y <= D && z <= H);
+    }
+
+    function render() {
+      const item = [Number($w.value)||0, Number($d.value)||0, Number($h.value)||0];
+      if (item.some(v => v <= 0)) { $list.innerHTML = '<p>サイズを入力してください。</p>'; return; }
+
+      const judged = cars.map(c => {
+        const easy = fits(item, c.dims, 5);   // 5cm以上のゆとりで入る
+        const just = fits(item, c.dims, 0);   // ぴったりなら入る
+        const status = easy ? 'fit' : just ? 'tight' : 'nofit';
+        return { ...c, status };
+      });
+
+      const order = { fit: 0, tight: 1, nofit: 2 };
+      judged.sort((a, b) => order[a.status] - order[b.status]);
+
+      const label = { fit: '✅ 積めそう', tight: '⚠️ ギリギリ', nofit: '❌ 難しそう' };
+      $list.innerHTML = judged.map(c => `
+        <div class="car ${c.status}">
+          <span class="badge">${label[c.status]}</span>
+          <div>
+            <div class="name">${c.name}</div>
+            <div class="type">${c.type}</div>
+          </div>
+          <div class="dims-txt">荷室目安<br>${c.dims[0]}×${c.dims[1]}×${c.dims[2]}cm</div>
+        </div>
+      `).join('');
+
+      const fitCount = judged.filter(c => c.status === 'fit').length;
+      const tightCount = judged.filter(c => c.status === 'tight').length;
+      $summary.textContent = `— ${cars.length}車種中 ✅${fitCount}台 ⚠️${tightCount}台`;
+    }
+
+    [$w, $d, $h].forEach(el => el.addEventListener('input', () => {
+      document.querySelectorAll('.preset').forEach(x => x.classList.remove('active'));
+      render();
+    }));
+
+    render();
+  </script>
+
+</body>
+</html>

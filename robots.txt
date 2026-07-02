@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://omikirin.github.io/Carkong/sitemap.xml
