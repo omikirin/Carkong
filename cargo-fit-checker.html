@@ -117,9 +117,92 @@
     }
     .cta a { color: var(--red); }
     .disclaimer { font-size: .72rem; color: var(--muted); margin-top: 1rem; text-align: center; }
+
+    /* ===== site header / footer ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #fff;
+      border-bottom: 4px solid var(--yellow);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .7rem 0;
+      width: min(1080px, 92%);
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--green-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .logo .mark { background: var(--yellow); border-radius: 8px; padding: .05rem .5rem; font-size: 1.2rem; }
+    nav.global { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    nav.global a { text-decoration: none; font-weight: 700; font-size: .92rem; color: var(--ink); }
+    nav.global a:hover { color: var(--green); }
+    .header-tel a { font-size: 1.2rem; font-weight: 900; color: var(--red); text-decoration: none; white-space: nowrap; }
+
+    footer {
+      background: var(--green-dark);
+      color: #cfe8d6;
+      text-align: center;
+      padding: 1.6rem 0 2rem;
+      font-size: .85rem;
+      margin-top: 2rem;
+    }
+    footer .foot-logo { font-weight: 900; color: #fff; font-size: 1.1rem; margin-bottom: .3rem; }
+    footer a { color: var(--yellow); }
+
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 45;
+      box-shadow: 0 -4px 16px rgba(0,0,0,.18);
+    }
+    .mobile-cta a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: .95rem;
+      padding: .95rem .5rem;
+      color: #fff;
+    }
+    .mobile-cta .m-tel { background: var(--red); }
+    .mobile-cta .m-stock { background: var(--green); }
+
+    @media (max-width: 720px) {
+      nav.global { display: none; }
+      .mobile-cta { display: flex; }
+      body { padding-bottom: 3.4rem; }
+    }
   </style>
 </head>
 <body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><span class="mark">🦍</span>カーコング</a>
+      <nav class="global">
+        <a href="index.html">ホーム</a>
+        <a href="qa.html">Q&amp;A記事 100選</a>
+        <a href="cost-simulator.html">維持費シミュレーター</a>
+        <a href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">在庫情報</a>
+        <a href="index.html#access">店舗・アクセス</a>
+      </nav>
+      <div class="header-tel"><a href="tel:0078-6044-8121">0078-6044-8121</a></div>
+    </div>
+  </header>
 
   <div class="tool-head">
     <h1>🦍 荷室フィットチェッカー</h1>
@@ -260,6 +343,21 @@
 
     render();
   </script>
+
+
+  <footer>
+    <div class="wrap" style="padding:0;">
+      <div class="foot-logo">🦍 カーコング</div>
+      <div>埼玉県八潮市南川崎810-3｜有限会社ティーエヌオートクラブ</div>
+      <div><a href="index.html">ホームへ戻る</a>｜<a href="qa.html">Q&amp;A記事 100選</a></div>
+      <div>&copy; CarKong / T.N Auto Club Co., Ltd.</div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta">
+    <a class="m-tel" href="tel:0078-6044-8121">📞 電話で相談（通話無料）</a>
+    <a class="m-stock" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">🚗 在庫を見る</a>
+  </div>
 
 </body>
 </html>
