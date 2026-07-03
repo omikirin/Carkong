@@ -2,15 +2,20 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>カーコング｜埼玉県八潮市の中古車販売・買取・車検・整備</title>
-  <meta name="description" content="埼玉県八潮市の中古車販売店カーコング（有限会社ティーエヌオートクラブ）。自信を持っておすすめできる特選車のみを厳選。販売・買取・車検・修理・カスタマイズまでワンストップでお任せください。" />
+  <meta name="description" content="埼玉県八潮市の中古車販売店カーコング（有限会社ティーエヌオートクラブ）。自信を持っておすすめできる特選車のみを厳選。販売・買取・車検・修理・カスタマイズまでワンストップでお任せください。草加・三郷・越谷・足立区からのご来店も歓迎。" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="カーコング｜埼玉県八潮市の中古車販売・買取・車検・整備" />
   <meta property="og:description" content="自信を持っておすすめできる特選車のみを厳選。レビュー総合5.0。販売・買取・車検・修理・カスタマイズまでワンストップ。つくばエクスプレス八潮駅まで送迎いたします。" />
-  <meta property="og:image" content="images/hero2.jpg" />
+    <link rel="canonical" href="https://omikirin.github.io/Carkong/" />
+  <meta property="og:url" content="https://omikirin.github.io/Carkong/" />
+  <meta property="og:image" content="https://omikirin.github.io/Carkong/images/hero2.jpg" />
+  <meta property="og:image:width" content="1672" />
+  <meta property="og:image:height" content="941" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" as="image" href="images/hero2.webp" type="image/webp" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
   <script type="application/ld+json">
   {
@@ -35,11 +40,19 @@
       "opens": "10:30",
       "closes": "19:00"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "16"
-    }
+    "url": "https://omikirin.github.io/Carkong/",
+    "image": "https://omikirin.github.io/Carkong/images/hero2.jpg",
+    "geo": { "@type": "GeoCoordinates", "latitude": 35.79, "longitude": 139.84 },
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%BC%E3%82%B3%E3%83%B3%E3%82%B0+%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82%E5%8D%97%E5%B7%9D%E5%B4%8E810-3",
+    "areaServed": [
+      { "@type": "City", "name": "八潮市" },
+      { "@type": "City", "name": "草加市" },
+      { "@type": "City", "name": "三郷市" },
+      { "@type": "City", "name": "越谷市" },
+      { "@type": "City", "name": "吉川市" },
+      { "@type": "City", "name": "川口市" },
+      { "@type": "City", "name": "足立区" }
+    ]
   }
   </script>
   <script type="application/ld+json">
@@ -64,6 +77,16 @@
       },
       {
         "@type": "Question",
+        "name": "保証は付きますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "お車ごとに付けられる保証をご用意しています。保証の有無・範囲・期間は必ずご契約前にご説明します。" }
+      },
+      {
+        "@type": "Question",
+        "name": "表示価格以外に費用はかかりますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "お見積りでは税金・保険料・手続き費用まで含めた支払総額を内訳付きでご提示します。あとから想定外の費用を追加することはありません。" }
+      },
+      {
+        "@type": "Question",
         "name": "定休日はいつですか？",
         "acceptedAnswer": { "@type": "Answer", "text": "水曜日が定休日です（※他曜日臨時休業の場合も有ります）。営業時間は10:30〜19:00です。" }
       }
@@ -84,7 +107,7 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
       margin: 0;
       font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
@@ -183,6 +206,8 @@
       flex-direction: column;
       background: #fff;
       border-top: 1px solid var(--line);
+      max-height: calc(100dvh - 70px);
+      overflow-y: auto;
     }
     .mobile-nav a {
       text-decoration: none;
@@ -234,6 +259,15 @@
       color: #4a3f00;
       margin: 0 0 1.4rem;
     }
+    .hero-badges {
+      font-size: .88rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      margin: 0 0 1rem;
+    }
+    .hero-badges a { color: var(--red); }
+    .cta-note { font-size: .8rem; color: #4a3f00; margin: .8rem 0 0; font-weight: 700; }
+    .btn-lg { font-size: 1.15rem; padding: 1rem 2.2rem; }
     .cta-row { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
     .btn {
       display: inline-block;
@@ -325,6 +359,19 @@
     .card h3 { margin: 0 0 .5rem; color: var(--green-dark); font-size: 1.12rem; }
     .card p { margin: 0; color: var(--muted); font-size: .95rem; }
 
+    .promise-box {
+      margin-top: 1.4rem;
+      background: #fff;
+      border: 2px solid var(--green);
+      border-radius: 16px;
+      padding: 1.3rem 1.5rem;
+      box-shadow: 0 6px 18px rgba(60,50,0,.06);
+    }
+    .promise-box h3 { margin: 0 0 .6rem; color: var(--green-dark); font-size: 1.15rem; }
+    .promise-box ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .3rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .promise-box li { font-size: .93rem; }
+    .promise-box li::before { content: "✅ "; }
+    .promise-box strong { color: var(--red); }
     .reason-card { border-top: 6px solid var(--yellow); }
     .reason-card .num {
       font-size: 2rem;
@@ -582,6 +629,12 @@
       .header-inner { gap: .5rem; }
       .header-tel a { font-size: .95rem; }
     }
+
+    /* iPhone safe-area */
+    .mobile-cta a { padding-bottom: calc(.95rem + env(safe-area-inset-bottom)); }
+    @media (max-width: 720px) {
+      body { padding-bottom: calc(3.7rem + env(safe-area-inset-bottom)); }
+    }
   </style>
 </head>
 <body>
@@ -611,19 +664,20 @@
       </label>
     </div>
     <nav class="mobile-nav">
-      <a href="#about">カーコングとは</a>
-      <a href="#service">サービス</a>
-      <a href="#reason">選ばれる理由</a>
-      <a href="#voice">クチコミ</a>
+      <a href="tel:0078-6044-8121" style="color:var(--red);">📞 電話で相談する（通話無料）</a>
       <a href="#stock">在庫情報</a>
+      <a href="#access">店舗・アクセス</a>
       <a href="#flow">ご購入の流れ</a>
-      <a href="#faq">よくある質問</a>
-      <a href="qa.html">Q&amp;A記事 100選</a>
       <a href="recommend.html">オススメ診断</a>
       <a href="zukan.html">自動車図鑑</a>
       <a href="cargo-fit-checker.html">荷室フィットチェッカー</a>
       <a href="cost-simulator.html">維持費シミュレーター</a>
-      <a href="#access">店舗・アクセス</a>
+      <a href="qa.html">Q&amp;A記事 100選</a>
+      <a href="#service">サービス</a>
+      <a href="#reason">選ばれる理由</a>
+      <a href="#voice">クチコミ</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#about">カーコングとは</a>
     </nav>
   </header>
 
@@ -636,12 +690,14 @@
       <div class="hero-copy">
         <span class="tagline">埼玉県八潮市の中古車販売店</span>
         <h1>お金で損しない、<br class="sp" />賢いクルマ選びを。</h1>
-        <p class="sub">自信を持っておすすめできる「特選車」だけを厳選。販売から買取・車検・修理まで、クルマのことは何でもカーコングにお任せください。</p>
+        <p class="sub">特選車だけを厳選。販売・買取・車検・修理までワンストップ。</p>
+        <p class="hero-badges">★★★★★ 5.0 <a href="https://www.goo-net.com/user_review/0561208/detail.html" target="_blank" rel="noopener">グーネットクチコミ16件</a>｜総額明示｜TX八潮駅お迎えOK</p>
         <div class="cta-row">
-          <a class="btn btn-green" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">在庫車両を見る（グーネット）</a>
-          <a class="btn btn-red" href="tel:0078-6044-8121">📞 電話で相談する</a>
-          <a class="btn btn-white" href="#access">アクセスを見る</a>
+          <a class="btn btn-red btn-lg" href="tel:0078-6044-8121">📞 電話で相談する（通話無料）</a>
+          <a class="btn btn-green" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">在庫車両を見る</a>
+          <a class="btn btn-white" href="#access">アクセス</a>
         </div>
+        <p class="cta-note">10:30〜19:00・水曜定休／車種が決まっていなくてもOK／PCの方は <strong>0078-6044-8121</strong> へ</p>
       </div>
     </div>
   </section>
@@ -734,6 +790,16 @@
           <p>車検・修理・カスタマイズまで対応するから、納車がゴールではなくお付き合いのスタート。カーライフを末永くサポートします。</p>
         </article>
       </div>
+      <div class="promise-box reveal">
+        <h3>🦍 カーコングのお約束</h3>
+        <ul>
+          <li>お見積り・査定は<strong>無料</strong>です</li>
+          <li>諸費用まで含めた<strong>支払総額</strong>を必ずご提示します</li>
+          <li>その場でご契約を迫るような営業はいたしません</li>
+          <li>保証の有無と範囲は<strong>ご契約前に</strong>ご説明します</li>
+          <li>納車後のご相談・メンテナンスも歓迎です</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -758,6 +824,9 @@
         親切で丁寧、そして迅速な対応をしていただける良いお店です。安心してお任せできました。
         <cite>― ご購入いただいたお客様の声（グーネット クチコミより）</cite>
       </blockquote>
+      <p style="text-align:center; margin:1.2rem 0 0;">
+        <a class="btn btn-green" href="https://www.goo-net.com/user_review/0561208/detail.html" target="_blank" rel="noopener">グーネットでクチコミ16件を読む</a>
+      </p>
       <p class="review-note">※評価はグーネット掲載のクチコミ（投稿時点）に基づきます。</p>
     </div>
   </section>
@@ -838,6 +907,18 @@
         <details>
           <summary>今乗っている車の買取だけでもお願いできますか？</summary>
           <p class="faq-a">もちろん可能です。お乗り換えの下取りだけでなく、買取のみのご相談も歓迎です。まずはお気軽にお問い合わせください。</p>
+        </details>
+        <details>
+          <summary>保証は付きますか？</summary>
+          <p class="faq-a">お車ごとに付けられる保証をご用意しています。保証の有無・範囲・期間は必ずご契約前にご説明しますので、ご不明な点は遠慮なくお尋ねください。</p>
+        </details>
+        <details>
+          <summary>表示価格以外に費用はかかりますか？</summary>
+          <p class="faq-a">お見積りでは税金・保険料・手続き費用まで含めた「支払総額」を内訳付きでご提示します。あとから想定外の費用を追加することはありません。</p>
+        </details>
+        <details>
+          <summary>購入後に不具合が出たらどうすればいい？</summary>
+          <p class="faq-a">まずはお電話ください。保証範囲内のものは保証で、範囲外のものも修理のご相談として誠実に対応します。当店は車検・修理まで自社で承っているのでアフターも安心です。</p>
         </details>
         <details>
           <summary>定休日はいつですか？</summary>
@@ -922,6 +1003,10 @@
             </tr>
           </table>
           <p class="info-note">※ご来店の際は、事前にお電話いただけるとスムーズにご案内できます。</p>
+          <div class="card" style="margin-top:1rem;">
+            <h3 style="margin-top:0;">対応エリア</h3>
+            <p style="margin:0; font-size:.9rem; color:var(--muted);">首都高6号三郷線「八潮」IC・外環道「三郷南」ICからすぐ。<strong style="color:var(--red);">草加市・三郷市・越谷市・吉川市・川口市、東京都足立区</strong>からも車で15〜30分です。つくばエクスプレス「八潮駅」は北千住から約17分——駅までお迎えに上がりますので、都内から電車でのご来店も歓迎です。</p>
+          </div>
         </div>
         <div>
           <iframe
@@ -930,6 +1015,10 @@
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="カーコング（埼玉県八潮市南川崎810-3）の地図"></iframe>
+          <p style="display:flex; gap:.6rem; flex-wrap:wrap; margin:.8rem 0 0;">
+            <a class="btn btn-green" style="font-size:.88rem; padding:.6rem 1.2rem;" href="https://www.google.com/maps/dir/?api=1&destination=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82%E5%8D%97%E5%B7%9D%E5%B4%8E810-3" target="_blank" rel="noopener">🗺️ Googleマップでルート案内</a>
+            <a class="btn btn-white" style="font-size:.88rem; padding:.6rem 1.2rem;" href="https://www.google.com/maps/search/?api=1&query=%E3%82%AB%E3%83%BC%E3%82%B3%E3%83%B3%E3%82%B0+%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82%E5%8D%97%E5%B7%9D%E5%B4%8E810-3" target="_blank" rel="noopener">Googleマップでクチコミを見る</a>
+          </p>
         </div>
       </div>
     </div>
@@ -940,13 +1029,15 @@
       <h2>クルマのこと、まずはお気軽にご相談ください</h2>
       <a class="tel" href="tel:0078-6044-8121">📞 0078-6044-8121</a>
       <p>営業時間 10:30〜19:00／定休日 水曜日（※他曜日臨時休業の場合も有ります）</p>
+      <p class="biz-status" style="font-size:.9rem; background:rgba(255,255,255,.18); display:inline-block; padding:.2rem 1rem; border-radius:999px;"></p>
+      <p style="margin-top:.6rem;"><a href="https://www.google.com/maps/dir/?api=1&destination=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82%E5%8D%97%E5%B7%9D%E5%B4%8E810-3" target="_blank" rel="noopener" style="color:#fff; font-weight:800;">🗺️ ルート案内を開く</a>／営業時間外は<a href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener" style="color:#ffe345; font-weight:800;">グーネットの在庫ページ</a>からもお問い合わせいただけます</p>
     </div>
   </section>
 
   <footer>
     <div class="wrap">
       <div class="foot-logo">🦍 カーコング</div>
-      <div>埼玉県八潮市南川崎810-3｜有限会社ティーエヌオートクラブ</div>
+      <div>埼玉県八潮市南川崎810-3（<a href="https://www.google.com/maps/dir/?api=1&destination=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82%E5%8D%97%E5%B7%9D%E5%B4%8E810-3" target="_blank" rel="noopener" style="color:var(--yellow);">🗺️ルート案内</a>）｜有限会社ティーエヌオートクラブ</div>
       <div>&copy; CarKong / T.N Auto Club Co., Ltd.</div>
     </div>
   </footer>
@@ -980,5 +1071,17 @@
     });
   </script>
 
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.biz-status');
+      if (!els.length) return;
+      var now = new Date(), d = now.getDay(), m = now.getHours() * 60 + now.getMinutes();
+      var open = d !== 3 && m >= 630 && m < 1140;
+      var t = open ? '🟢 ただいま営業中（19:00まで）'
+        : d === 3 ? '本日は定休日（水曜）です｜木曜10:30から営業'
+        : 'ただいま営業時間外です｜営業時間 10:30〜19:00（水曜定休）';
+      els.forEach(function (e) { e.textContent = t + '　※臨時休業の場合があります'; });
+    })();
+  </script>
 </body>
 </html>
