@@ -2,13 +2,17 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>子育て世帯のクルマQ&A 100選｜カーコング（埼玉県八潮市）</title>
   <meta name="description" content="チャイルドロックの掛け方、ISOFIXとは、チャイルドシート新規格R129、スライドドアの車種、ミニバンvsSUVなど、子育て家庭のクルマ選びの疑問100問に埼玉県八潮市の中古車販売店カーコングがお答えします。" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="子育て世帯のクルマQ&A 100選｜カーコング" />
   <meta property="og:description" content="チャイルドシート・スライドドア・ファミリーカー選びまで、子育て家庭のクルマの疑問100問に中古車のプロがお答えします。" />
-  <meta property="og:image" content="images/hero2.jpg" />
+    <link rel="canonical" href="https://omikirin.github.io/Carkong/qa.html" />
+  <meta property="og:url" content="https://omikirin.github.io/Carkong/qa.html" />
+  <meta property="og:image" content="https://omikirin.github.io/Carkong/images/hero2.jpg" />
+  <meta property="og:image:width" content="1672" />
+  <meta property="og:image:height" content="941" />
   <meta property="og:locale" content="ja_JP" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ffd900'/><text x='50' y='72' font-size='60' text-anchor='middle'>🦍</text></svg>" />
   <style>
@@ -168,6 +172,19 @@
     .qa-body strong { color: var(--red); }
     .qa-note { font-size: .8rem; color: var(--muted); }
 
+    .mini-cta {
+      background: var(--yellow-soft);
+      border: 1.5px dashed var(--green);
+      border-radius: 12px;
+      padding: .7rem 1rem;
+      margin-top: 1rem;
+      font-size: .88rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mini-cta a { color: var(--red); }
+    .faq-more { margin-top: .5rem !important; font-size: .85rem; font-weight: 700; }
+    .faq-more a { color: var(--red); }
     .cta-box {
       background: linear-gradient(135deg, #ffe345, var(--yellow));
       border-radius: 18px;
@@ -247,6 +264,12 @@
       .mobile-cta { display: flex; }
       body { padding-bottom: 3.4rem; }
       .controls { top: 62px; }
+    }
+
+    /* iPhone safe-area */
+    .mobile-cta a { padding-bottom: calc(.95rem + env(safe-area-inset-bottom)); }
+    @media (max-width: 720px) {
+      body { padding-bottom: calc(3.7rem + env(safe-area-inset-bottom)); }
     }
   </style>
 </head>
@@ -484,6 +507,7 @@
         </details>
 
       </div>
+      <div class="mini-cta">👶 「この在庫、ISOFIX対応？」——お電話1本で即答します <a href="tel:0078-6044-8121">📞 0078-6044-8121（通話無料）</a></div>
     </section>
 
     <section class="qa-section" data-section="choose">
@@ -501,6 +525,7 @@
               <li>ほかに ルークス（日産）、ムーヴキャンバス（ダイハツ）、ワゴンRスマイル（スズキ）など</li>
             </ul>
             <p>中古市場でも玉数が多く、予算に合わせて選びやすいジャンルです。ご希望があれば在庫や入荷情報をお調べします。</p>
+            <p class="faq-more">▶ <a href="zukan.html">自動車図鑑でスライドドア軽を一覧・比較する</a></p>
           </div>
         </details>
 
@@ -514,6 +539,7 @@
               <li><strong>ラージ</strong>：トヨタ アルファード／ヴェルファイア、日産 エルグランド</li>
             </ul>
             <p>お子さまの人数、駐車場のサイズ、ご予算で最適解が変わります。「うちの場合はどれ？」という段階からでも、お気軽にご相談ください。</p>
+            <p class="faq-more">▶ <a href="zukan.html">自動車図鑑でミニバンを一覧・比較する</a></p>
           </div>
         </details>
 
@@ -526,6 +552,7 @@
               <li><strong>SUVの強み</strong>：走りとデザイン、アウトドアでの走破性、リセールの強さ</li>
             </ul>
             <p>「毎日の保育園送迎が中心ならミニバン」「週末のレジャー重視で子どもがある程度大きいならSUV」が目安。ライフスタイルをお聞きして、リアルなおすすめをお伝えします。</p>
+            <p class="faq-more">▶ <a href="recommend.html">オススメ診断であなた向きの3台を見る</a></p>
           </div>
         </details>
 
@@ -589,6 +616,7 @@
               <li><strong>ハンズフリー機能</strong>：足をかざすだけでバックドアが開く車種は神装備</li>
             </ul>
             <p>お使いのベビーカーの型番を教えていただければ、在庫車に実際に積めるかどうかの確認もできます。ご来店時にベビーカー持参での「試し積み」も大歓迎です。</p>
+            <p class="faq-more">▶ <a href="cargo-fit-checker.html">荷室フィットチェッカーでベビーカーが積めるか試す</a></p>
           </div>
         </details>
 
@@ -602,6 +630,7 @@
               <li><strong>スペーシア</strong>：軽さを活かした燃費と、マイルドハイブリッドの経済性</li>
             </ul>
             <p>どれも優秀なので、実は「程度の良い個体に出会えるか」が中古選びの決め手。年式・走行距離・価格のバランスが良い一台をご提案します。</p>
+            <p class="faq-more">▶ <a href="zukan.html?q=N-BOX">図鑑でN-BOXの詳細を見る</a>／<a href="zukan.html?q=タント">タント</a>／<a href="zukan.html?q=スペーシア">スペーシア</a></p>
           </div>
         </details>
 
@@ -614,6 +643,7 @@
               <li><strong>フリード（ホンダ）</strong>：2列目キャプテンシート仕様が選べて3列目も比較的実用的。「ちょうどいい」の代名詞</li>
             </ul>
             <p>2列目の使い方（ベンチかキャプテンか）とデザインの好みで選ぶのがおすすめ。中古では年式×グレードの組み合わせで価格が大きく変わるので、予算をお聞きして最適な狙い目をご案内します。</p>
+            <p class="faq-more">▶ <a href="zukan.html?q=シエンタ">図鑑でシエンタを見る</a>／<a href="zukan.html?q=フリード">フリードを見る</a></p>
           </div>
         </details>
 
@@ -627,6 +657,7 @@
               <li><strong>ステップワゴン（ホンダ）</strong>：低床で広い室内、「わくわくゲート」（横開きバックドア）の年式も</li>
             </ul>
             <p>ご家族の優先順位（燃費？装備？価格？）を教えていただければ、中古市場の相場感も含めてアドバイスします。</p>
+            <p class="faq-more">▶ <a href="zukan.html?q=ノア">図鑑でノア/ヴォクシー</a>／<a href="zukan.html?q=セレナ">セレナ</a>／<a href="zukan.html?q=ステップワゴン">ステップワゴン</a>を見る</p>
           </div>
         </details>
 
@@ -717,6 +748,7 @@
         </details>
 
       </div>
+      <div class="mini-cta">🎯 車種選びに迷ったら、3つ選ぶだけの<a href="recommend.html">「オススメ診断」</a>で候補を3台に絞れます</div>
     </section>
 
     <section class="qa-section" data-section="money">
@@ -792,6 +824,7 @@
               <li>燃費も軽が有利なことが多い</li>
             </ul>
             <p>ただし高速道路を多用するご家庭は普通車の快適性・安定感も価値。維持費差と使い方を天秤にかけましょう。</p>
+            <p class="faq-more">▶ <a href="cost-simulator.html">維持費シミュレーターで軽と普通車の月額を比べる</a></p>
           </div>
         </details>
 
@@ -814,6 +847,7 @@
               <li>ガソリン価格アプリや決済割引の活用</li>
             </ul>
             <p>そもそも論として「維持費の安い車種を選ぶ」のが最大の節約。購入前が一番の節約チャンスです。</p>
+            <p class="faq-more">▶ <a href="cost-simulator.html">維持費シミュレーターで試算してみる</a></p>
           </div>
         </details>
 
@@ -877,6 +911,7 @@
         </details>
 
       </div>
+      <div class="mini-cta">⛽ うちの場合は月いくら？——<a href="cost-simulator.html">維持費かんたんシミュレーター</a>で30秒試算</div>
     </section>
 
     <section class="qa-section" data-section="quality">
@@ -1029,6 +1064,7 @@
         </details>
 
       </div>
+      <div class="mini-cta">🔧 保証・整備のご質問は現車を見ながらが一番。<a href="tel:0078-6044-8121">📞 お電話</a>でもお答えします</div>
     </section>
 
     <section class="qa-section" data-section="life">
@@ -1177,6 +1213,7 @@
         </details>
 
       </div>
+      <div class="mini-cta">📦 ベビーカー、その車に積める？——<a href="cargo-fit-checker.html">荷室フィットチェッカー</a>で判定</div>
     </section>
 
     <section class="qa-section" data-section="sell">
@@ -1290,6 +1327,7 @@
         </details>
 
       </div>
+      <div class="mini-cta">💰 査定は無料・売るか未定でもOK。<a href="tel:0078-6044-8121">📞 0078-6044-8121</a>で相場だけでも</div>
     </section>
 
     <section class="qa-section" data-section="legal">
@@ -1402,6 +1440,7 @@
         </details>
 
       </div>
+      <div class="mini-cta">📋 手続きの代行もお任せください。<a href="tel:0078-6044-8121">📞 まずはお気軽に</a></div>
     </section>
 
     <div class="cta-box">
@@ -1409,6 +1448,8 @@
       <p>「うちの場合はどう?」にお答えします。お子さま連れのご来店も大歓迎。<br>八潮駅までお迎えにあがります。</p>
       <a class="btn btn-red" href="tel:0078-6044-8121">📞 電話で相談する（通話無料）</a>
       <a class="btn btn-green" href="https://www.goo-net.com/usedcar_shop/0561208/stock.html" target="_blank" rel="noopener">🚗 在庫を見る</a>
+      <div style="font-size:.8rem; font-weight:700; margin-top:.7rem;">★5.0 <a href="https://www.goo-net.com/user_review/0561208/detail.html" target="_blank" rel="noopener">グーネットクチコミ16件</a>の中古車店</div>
+      <div class="biz-status" style="font-size:.78rem; color:var(--muted); margin-top:.2rem;"></div>
     </div>
 
   </main>
@@ -1416,7 +1457,7 @@
   <footer>
     <div class="wrap">
       <div class="foot-logo">🦍 カーコング</div>
-      <div>埼玉県八潮市南川崎810-3｜有限会社ティーエヌオートクラブ</div>
+      <div>埼玉県八潮市南川崎810-3（<a href="https://www.google.com/maps/dir/?api=1&destination=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82%E5%8D%97%E5%B7%9D%E5%B4%8E810-3" target="_blank" rel="noopener">🗺️ルート案内</a>）｜有限会社ティーエヌオートクラブ</div>
       <div><a href="index.html">ホームへ戻る</a></div>
       <div>&copy; CarKong / T.N Auto Club Co., Ltd.</div>
       <div style="margin-top:.6rem; font-size:.75rem; color:#9dc3aa">※本ページの情報は一般的な目安です。法令・制度は改正される場合があります。個別のご事情は店舗までご相談ください。</div>
@@ -1474,5 +1515,17 @@
     }, { passive: true });
   </script>
 
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.biz-status');
+      if (!els.length) return;
+      var now = new Date(), d = now.getDay(), m = now.getHours() * 60 + now.getMinutes();
+      var open = d !== 3 && m >= 630 && m < 1140;
+      var t = open ? '🟢 ただいま営業中（19:00まで）'
+        : d === 3 ? '本日は定休日（水曜）です｜木曜10:30から営業'
+        : 'ただいま営業時間外です｜営業時間 10:30〜19:00（水曜定休）';
+      els.forEach(function (e) { e.textContent = t + '　※臨時休業の場合があります'; });
+    })();
+  </script>
 </body>
 </html>
