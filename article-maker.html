@@ -91,6 +91,7 @@
         <button class="go" id="btnPreview">👀 プレビュー更新</button>
         <button class="go green" id="btnDownload">⬇️ 記事HTMLをダウンロード</button>
         <button class="go green" id="btnCopyList">📋 一覧追加用の1行をコピー</button>
+        <button class="go green" id="btnVideo">🎬 動画台本をコピー</button>
       </div>
 
       <div class="steps">
@@ -371,6 +372,19 @@ ${d.bodyHtml}    </article>
       a.download = `article-${d.slug}.html`;
       a.click();
       URL.revokeObjectURL(a.href);
+    });
+    F('btnVideo').addEventListener('click', () => {
+      const d = data();
+      const heads = (F('fBody').value.match(/^## .+$/gm) || []).map(h => h.slice(3)).slice(0, 3);
+      const script = [
+        `［フック：0-5秒］${d.title}`,
+        ...heads.map((h, i) => `［ポイント${i + 1}］${h}`),
+        '［締め：50-60秒］詳しくは概要欄のリンクから。八潮のカーコングでした🦍',
+      ].join('\n');
+      navigator.clipboard.writeText(script).then(() => {
+        F('btnVideo').textContent = '✅ 台本コピーしました';
+        setTimeout(() => F('btnVideo').textContent = '🎬 動画台本をコピー', 1500);
+      });
     });
     F('btnCopyList').addEventListener('click', () => {
       renderPreview();

@@ -87,11 +87,14 @@
 
   <div class="tool-head">
     <h1>🦍 カーコングのコラム</h1>
-    <p>中古車の買い方・お金・子育てと車。八潮の中古車屋が本音で書く読みものです。</p>
+    <p>中古車の買い方・お金・子育て・車種ガイドまで105記事。全記事に「60秒動画台本」付き🎬</p>
   </div>
 
   <main class="wrap">
+    <input id="artSearch" type="search" placeholder="記事を探す（例：N-BOX／車検／ベビーカー）"
+      style="width:100%; border:2px solid var(--green); border-radius:999px; padding:.6rem 1.2rem; font-size:.98rem; margin-bottom:.8rem; background:#fff; color:var(--ink);" />
     <div class="chips" id="catChips"></div>
+    <p style="font-size:.8rem; color:var(--muted); margin:.2rem 0 .8rem;" id="hitCount"></p>
     <div class="art-list" id="artList"></div>
 
     <div class="cta">
@@ -135,9 +138,12 @@
       $chips.appendChild(b);
     });
 
+    const $search = document.getElementById('artSearch');
     function render() {
+      const kw = $search.value.trim().toLowerCase();
       const items = window.ARTICLES
-        .filter(a => active === 'すべて' || a.cat === active)
+        .filter(a => (active === 'すべて' || a.cat === active) &&
+                     (!kw || (a.title + a.desc + a.cat).toLowerCase().includes(kw)))
         .sort((a, b) => b.date.localeCompare(a.date));
       $list.innerHTML = items.map(a => `
         <a class="art-card" href="${a.slug}.html">
@@ -145,8 +151,10 @@
           <h2>${a.title}</h2>
           <p>${a.desc}</p>
         </a>
-      `).join('');
+      `).join('') || '<p style="color:var(--muted)">該当する記事がありません。</p>';
+      document.getElementById('hitCount').textContent = `${items.length} / ${window.ARTICLES.length} 記事を表示中`;
     }
+    $search.addEventListener('input', render);
     render();
 
     (function () {
