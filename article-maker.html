@@ -98,7 +98,8 @@
         <b>公開までの3ステップ</b><br />
         ① 「記事HTMLをダウンロード」→ できたファイルをGitHubのリポジトリ直下にアップロード<br />
         ② 「一覧追加用の1行をコピー」→ <b>articles-data.js</b> の配列の先頭に貼り付け<br />
-        ③ コミットすれば <b>コラム一覧に自動で表示</b>されます（sitemap.xmlにもURLを1件追加するとSEO効果UP）
+        ③ コミットすれば <b>コラム一覧に自動で表示</b>されます（sitemap.xmlにもURLを1件追加するとSEO効果UP）<br />
+        ④ 画像はGPTで生成して <b>images/articles/article-ファイル名-hero.png</b> でアップすると自動表示（コンガのキャラ設定は image-prompts.json 参照）
       </div>
       <div class="out" id="listLine">（ここに一覧追加用の1行が表示されます）</div>
     </div>
@@ -266,6 +267,8 @@
 
   <main class="wrap">
     <article>
+      <img src="images/articles/article-${d.slug}-hero.png" alt="" loading="lazy" onerror="this.remove()"
+        style="width:100%; border-radius:14px; margin:0 0 1rem; border:3px solid #fff; box-shadow:0 8px 22px rgba(60,50,0,.12); display:block;" />
 ${d.bodyHtml}    </article>
 
     <div class="cta-inline">
